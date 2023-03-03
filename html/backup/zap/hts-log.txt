@@ -1,0 +1,22 @@
+HTTrack3.49-2+htsswf+htsjava launched on Sat, 09 May 2020 09:07:12 at http://tazkarty.itgeeks.info/index-default.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" http://tazkarty.itgeeks.info/index-default.html -O1 "D:\Projects\zapbooking.com\zap" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+09:07:16	Error: 	"Internal Server Error" (500) after 2 retries at link tazkarty.itgeeks.info/robots.txt (from primary/primary)
+09:14:11	Warning: 	Retry after error 500 (Internal Server Error) at link tazkarty.itgeeks.info/images/general-elements/overlay-pattern.png (from tazkarty.itgeeks.info/css/style.css)
+09:14:22	Warning: 	Retry after error 500 (Internal Server Error) at link tazkarty.itgeeks.info/js/owl.carousel.min.js (from tazkarty.itgeeks.info/index.html)
+09:14:23	Warning: 	Retry after error -4 (Connect Error) at link tazkarty.itgeeks.info/images/files/blog-posts/img-2.jpg (from tazkarty.itgeeks.info/blog-single.html)
+09:14:25	Warning: 	Retry after error 500 () at link tazkarty.itgeeks.info/images/general-elements/overlay-pattern.png (from tazkarty.itgeeks.info/css/style.css)
+09:14:35	Warning: 	Retry after error 500 (Internal Server Error) at link tazkarty.itgeeks.info/rtl/index-default.html (from tazkarty.itgeeks.info/rtl/index.html)
+09:14:35	Warning: 	Retry after error 500 (Internal Server Error) at link tazkarty.itgeeks.info/js/owl.carousel.min.js (from tazkarty.itgeeks.info/index.html)
+09:14:35	Error: 	"" (500) after 2 retries at link tazkarty.itgeeks.info/images/general-elements/overlay-pattern.png (from tazkarty.itgeeks.info/css/style.css)
+09:14:36	Warning: 	Retry after error 500 (Internal Server Error) at link tazkarty.itgeeks.info/rtl/index-default.html (from tazkarty.itgeeks.info/rtl/index.html)
+09:14:36	Error: 	"Internal Server Error" (500) after 2 retries at link tazkarty.itgeeks.info/js/owl.carousel.min.js (from tazkarty.itgeeks.info/index.html)
+09:14:36	Error: 	"Internal Server Error" (500) after 2 retries at link tazkarty.itgeeks.info/rtl/index-default.html (from tazkarty.itgeeks.info/rtl/index.html)
+
+HTTrack Website Copier/3.49-2 mirror complete in 7 minutes 24 seconds : 178 links scanned, 167 files written (12781955 bytes overall) [11837641 bytes received at 26661 bytes/sec], 1332983 bytes transferred using HTTP compression in 27 files, ratio 23%, 1.4 requests per connection
+(4 errors, 7 warnings, 0 messages)
