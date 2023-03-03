@@ -167,7 +167,7 @@ class ManageholidaypackageController extends Controller
 			$obj->details_day_night	=	@$requestData['details_day_night'];
 			$obj->no_of_days	=	@$requestData['no_of_days'];
 			$obj->support_no	=	@$requestData['support_no'];
-			$obj->sales_price	=	 $depPrice ? $depPrice['twin'] : null;
+			$obj->sales_price	=	 @$depPrice ? $depPrice['twin'] : null;
 			//$obj->offer_price	=	@$requestData['offer_price'];
 			$obj->discount	=	@$requestData['discount'];
 			//$obj->price_details	=	@$requestData['price_details'];
@@ -645,7 +645,7 @@ class ManageholidaypackageController extends Controller
 			$obj->details_day_night	=	@$requestData['details_day_night'];
 			$obj->no_of_days	=	@$requestData['no_of_days'];
 			$obj->support_no	=	@$requestData['support_no'];
-			$obj->sales_price	=	$depPrice ? $depPrice['twin'] : $obj->sales_price;
+			$obj->sales_price	=	@$depPrice ? $depPrice['twin'] : $obj->sales_price;
 			$obj->onward_flight	=	@$requestData['onward_flight']; 
 			$obj->return_flight	=	@$requestData['return_flight'];
 			$obj->flightname	=	@$requestData['flight_name']; 

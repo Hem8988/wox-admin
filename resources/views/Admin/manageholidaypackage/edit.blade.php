@@ -2,17 +2,20 @@
 @section('title', 'Edit Manage Holiday Package')
 
 @section('content')
- <style>
- .datepicker{z-index: 9999!important;}
- .note-toolbar {
-    position: relative!important;
-    z-index: 1!important;
-}
- </style>
- <?php use App\Http\Controllers\Controller; ?>
- <script language="Javascript">
-       <!--
-       function isNumberKey(evt)
+<style>
+	.datepicker {
+		z-index: 9999 !important;
+	}
+
+	.note-toolbar {
+		position: relative !important;
+		z-index: 1 !important;
+	}
+</style>
+<?php use App\Http\Controllers\Controller; ?>
+<script language="Javascript">
+	<!--
+	function isNumberKey(evt)
        {
           var charCode = (evt.which) ? evt.which : evt.keyCode;
           if (charCode != 46 && charCode > 31 
@@ -21,8 +24,9 @@
 
           return true;
        }
-       //-->
-    </script>
+       //
+	-->
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<div class="content-header">
@@ -40,8 +44,8 @@
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</div>
-	
-	<!-- Main content --> 
+
+	<!-- Main content -->
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -51,486 +55,653 @@
 						@include('../Elements/flash-message')
 					</div>
 					<!-- Flash Message End -->
-				</div> 
+				</div>
 				<div class="col-md-12">
 					<div class="card card-primary">
-					  <div class="card-header">
-						<h3 class="card-title">Edit Manage Holiday Package</h3>
-					  </div>  
-					  <!-- /.card-header -->  
-					  <!-- form start -->
-					  {{ Form::open(array('url' => 'holidaypackage/edit', 'name'=>"edit-package", 'autocomplete'=>'off', "enctype"=>"multipart/form-data","content-type"=>'application/json')) }}
-					  {{ Form::hidden('id', @$fetchedData->id) }}
+						<div class="card-header">
+							<h3 class="card-title">Edit Manage Holiday Package</h3>
+						</div>
+						<!-- /.card-header -->
+						<!-- form start -->
+						{{ Form::open(array('url' => 'holidaypackage/edit', 'name'=>"edit-package",
+						'autocomplete'=>'off', "enctype"=>"multipart/form-data","content-type"=>'application/json')) }}
+						{{ Form::hidden('id', @$fetchedData->id) }}
 						<div class="card-body">
 							<div class="form-group" style="text-align:right;">
-								<a style="margin-right:5px;" href="{{route('admin.manageholidaypackage.index')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>  
-								{{ Form::button('<i class="fa fa-edit"></i> Update package', ['class'=>'btn btn-primary', 'id'=>'savebtn', 'onClick'=>'customValidate("edit-package")' ]) }}
+								<a style="margin-right:5px;" href="{{route('admin.manageholidaypackage.index')}}"
+									class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+								{{ Form::button('<i class="fa fa-edit"></i> Update package', ['class'=>'btn
+								btn-primary', 'id'=>'savebtn', 'onClick'=>'customValidate("edit-package")' ]) }}
 							</div>
 							<div class="row">
-							  <div class="col-5 col-sm-3">
-								<div class="nav flex-column nav-tabs h-100 custom_nav_tabs" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
-								  <a class="nav-link active" id="vert-tabs-packge-tab" data-toggle="pill" href="#vert-tabs-packge" role="tab" aria-controls="vert-tabs-packge" aria-selected="true">Holiday Package</a>
-								  <a class="nav-link" id="vert-tabs-flight-tab" data-toggle="pill" href="#vert-tabs-flight" role="tab" aria-controls="vert-tabs-flight" aria-selected="false">Flights</a>
-								  <a class="nav-link" id="vert-tabs-price-tab" data-toggle="pill" href="#vert-tabs-price" role="tab" aria-controls="vert-tabs-price" aria-selected="false">Price</a>
-								  
-								   <a class="nav-link" id="vert-tabs-addon-tab" data-toggle="pill" href="#vert-tabs-addon" role="tab" aria-controls="vert-tabs-addon" aria-selected="false">Addons</a>
-								  <a class="nav-link" id="vert-tabs-packtheme-tab" data-toggle="pill" href="#vert-tabs-packtheme" role="tab" aria-controls="vert-tabs-packtheme" aria-selected="false">Package Theme</a>
-								  <a class="nav-link" id="vert-tabs-itinerary-tab" data-toggle="pill" href="#vert-tabs-itinerary" role="tab" aria-controls="vert-tabs-itinerary" aria-selected="false">Itinerary</a>
-								  <a class="nav-link" id="vert-tabs-hotel-tab" data-toggle="pill" href="#vert-tabs-hotel" role="tab" aria-controls="vert-tabs-hotel" aria-selected="false">Hotel</a>
-								  <a class="nav-link" id="vert-tabs-inclusions-tab" data-toggle="pill" href="#vert-tabs-inclusions" role="tab" aria-controls="vert-tabs-inclusions" aria-selected="false">Inclusions</a>
-								  <a class="nav-link" id="vert-tabs-topinclusions-tab" data-toggle="pill" href="#vert-tabs-topinclusions" role="tab" aria-controls="vert-tabs-topinclusions" aria-selected="false">Top Inclusions</a>
-								  <a class="nav-link" id="vert-tabs-exclusions-tab" data-toggle="pill" href="#vert-tabs-exclusions" role="tab" aria-controls="vert-tabs-exclusions" aria-selected="false">Exclusions</a>
-								  <a class="nav-link" id="vert-tabs-tourpolicy-tab" data-toggle="pill" href="#vert-tabs-tourpolicy" role="tab" aria-controls="vert-tabs-tourpolicy" aria-selected="false">Tour Policy</a>
-								  <a class="nav-link" id="vert-tabs-galleryimg-tab" data-toggle="pill" href="#vert-tabs-galleryimg" role="tab" aria-controls="vert-tabs-galleryimg" aria-selected="false">Gallery Images</a>
-								  <a class="nav-link" id="vert-tabs-metatag-tab" data-toggle="pill" href="#vert-tabs-metatag" role="tab" aria-controls="vert-tabs-metatag" aria-selected="false">Meta Tags</a>
-								  <a class="nav-link" id="vert-tabs-metasearch-tab" data-toggle="pill" href="#vert-tabs-metasearch" role="tab" aria-controls="vert-tabs-metasearch" aria-selected="false">Tag Destination</a>
-								  <a class="nav-link" id="vert-tabs-pdf-tab" data-toggle="pill" href="#vert-tabs-pdf" role="tab" aria-controls="vert-tabs-pdf" aria-selected="false">PDF</a>
-								</div> 
-							  </div>
-							  <div class="col-7 col-sm-9">
-								<div class="tab-content custom_tab_content" id="vert-tabs-tabContent">
-								  <div class="tab-pane text-left fade show active" id="vert-tabs-packge" role="tabpanel" aria-labelledby="vert-tabs-packge-tab">
-								  <div class="form-group row">
-											<label for="pack_type" class="col-sm-2 col-form-label">Package Type <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-												<select data-valid ="required" name="pack_type" id="pack_type" class="form-control" autocomplete="new-password">
-													<option value="">Choose One...</option>
-													<option value="fixed" <?php if($fetchedData->package_type == 'fixed'){ echo 'selected'; } ?>>Fixed Departure</option>
-													<option value="group" <?php if($fetchedData->package_type == 'group'){ echo 'selected'; } ?>>Group Departure</option>
-													<option value="customized" <?php if($fetchedData->package_type == 'customized'){ echo 'selected'; } ?>>Customized Departure</option>
-												</select>							
-												@if ($errors->has('dest_type'))
+								<div class="col-5 col-sm-3">
+									<div class="nav flex-column nav-tabs h-100 custom_nav_tabs" id="vert-tabs-tab"
+										role="tablist" aria-orientation="vertical">
+										<a class="nav-link active" id="vert-tabs-packge-tab" data-toggle="pill"
+											href="#vert-tabs-packge" role="tab" aria-controls="vert-tabs-packge"
+											aria-selected="true">Holiday Package</a>
+										<a class="nav-link" id="vert-tabs-flight-tab" data-toggle="pill"
+											href="#vert-tabs-flight" role="tab" aria-controls="vert-tabs-flight"
+											aria-selected="false">Flights</a>
+										<a class="nav-link" id="vert-tabs-price-tab" data-toggle="pill"
+											href="#vert-tabs-price" role="tab" aria-controls="vert-tabs-price"
+											aria-selected="false">Price</a>
+
+										<a class="nav-link" id="vert-tabs-addon-tab" data-toggle="pill"
+											href="#vert-tabs-addon" role="tab" aria-controls="vert-tabs-addon"
+											aria-selected="false">Addons</a>
+										<a class="nav-link" id="vert-tabs-packtheme-tab" data-toggle="pill"
+											href="#vert-tabs-packtheme" role="tab" aria-controls="vert-tabs-packtheme"
+											aria-selected="false">Package Theme</a>
+										<a class="nav-link" id="vert-tabs-itinerary-tab" data-toggle="pill"
+											href="#vert-tabs-itinerary" role="tab" aria-controls="vert-tabs-itinerary"
+											aria-selected="false">Itinerary</a>
+										<a class="nav-link" id="vert-tabs-hotel-tab" data-toggle="pill"
+											href="#vert-tabs-hotel" role="tab" aria-controls="vert-tabs-hotel"
+											aria-selected="false">Hotel</a>
+										<a class="nav-link" id="vert-tabs-inclusions-tab" data-toggle="pill"
+											href="#vert-tabs-inclusions" role="tab" aria-controls="vert-tabs-inclusions"
+											aria-selected="false">Inclusions</a>
+										<a class="nav-link" id="vert-tabs-topinclusions-tab" data-toggle="pill"
+											href="#vert-tabs-topinclusions" role="tab"
+											aria-controls="vert-tabs-topinclusions" aria-selected="false">Top
+											Inclusions</a>
+										<a class="nav-link" id="vert-tabs-exclusions-tab" data-toggle="pill"
+											href="#vert-tabs-exclusions" role="tab" aria-controls="vert-tabs-exclusions"
+											aria-selected="false">Exclusions</a>
+										<a class="nav-link" id="vert-tabs-tourpolicy-tab" data-toggle="pill"
+											href="#vert-tabs-tourpolicy" role="tab" aria-controls="vert-tabs-tourpolicy"
+											aria-selected="false">Tour Policy</a>
+										<a class="nav-link" id="vert-tabs-galleryimg-tab" data-toggle="pill"
+											href="#vert-tabs-galleryimg" role="tab" aria-controls="vert-tabs-galleryimg"
+											aria-selected="false">Gallery Images</a>
+										<a class="nav-link" id="vert-tabs-metatag-tab" data-toggle="pill"
+											href="#vert-tabs-metatag" role="tab" aria-controls="vert-tabs-metatag"
+											aria-selected="false">Meta Tags</a>
+										<a class="nav-link" id="vert-tabs-metasearch-tab" data-toggle="pill"
+											href="#vert-tabs-metasearch" role="tab" aria-controls="vert-tabs-metasearch"
+											aria-selected="false">Tag Destination</a>
+										<a class="nav-link" id="vert-tabs-pdf-tab" data-toggle="pill"
+											href="#vert-tabs-pdf" role="tab" aria-controls="vert-tabs-pdf"
+											aria-selected="false">PDF</a>
+									</div>
+								</div>
+								<div class="col-7 col-sm-9">
+									<div class="tab-content custom_tab_content" id="vert-tabs-tabContent">
+										<div class="tab-pane text-left fade show active" id="vert-tabs-packge"
+											role="tabpanel" aria-labelledby="vert-tabs-packge-tab">
+											<div class="form-group row">
+												<label for="pack_type" class="col-sm-2 col-form-label">Package Type
+													<span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													<select data-valid="required" name="pack_type" id="pack_type"
+														class="form-control" autocomplete="new-password">
+														<option value="">Choose One...</option>
+														<option value="fixed" <?php if($fetchedData->package_type ==
+															'fixed'){ echo 'selected'; } ?>>Fixed Departure</option>
+														<option value="group" <?php if($fetchedData->package_type ==
+															'group'){ echo 'selected'; } ?>>Group Departure</option>
+														<option value="customized" <?php if($fetchedData->package_type
+															== 'customized'){ echo 'selected'; } ?>>Customized Departure
+														</option>
+													</select>
+													@if ($errors->has('dest_type'))
 													<span class="custom-error" role="alert">
 														<strong>{{ @$errors->first('dest_type') }}</strong>
-													</span> 
-												@endif
-										   </div>	
-									  </div>
-									  <div class="form-group row">
-											<label for="dest_type" class="col-sm-2 col-form-label">Type <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-												<select onChange="getLocations()" data-valid ="required" name="dest_type" id="dest_type" class="form-control" autocomplete="new-password">
-													<option value="">Choose One...</option>
-													<option value="domestic" <?php if($fetchedData->type == 'domestic'){ echo 'selected'; } ?>>Domestic</option>
-													<option value="international" <?php if($fetchedData->type == 'international'){ echo 'selected'; } ?>>International</option>
-												</select>							
-												@if ($errors->has('dest_type'))
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="dest_type" class="col-sm-2 col-form-label">Type <span
+														style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													<select onChange="getLocations()" data-valid="required"
+														name="dest_type" id="dest_type" class="form-control"
+														autocomplete="new-password">
+														<option value="">Choose One...</option>
+														<option value="domestic" <?php if($fetchedData->type ==
+															'domestic'){ echo 'selected'; } ?>>Domestic</option>
+														<option value="international" <?php if($fetchedData->type ==
+															'international'){ echo 'selected'; } ?>>International
+														</option>
+													</select>
+													@if ($errors->has('dest_type'))
 													<span class="custom-error" role="alert">
 														<strong>{{ @$errors->first('dest_type') }}</strong>
-													</span> 
-												@endif
-										   </div>	
-									  </div>
-									  <div class="form-group row">
-											<label for="destination" class="col-sm-2 col-form-label">Destination <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-												<select name="destination" data-valid ="required" id="destination" class="form-control" autocomplete="new-password">
-													<option value="">Choose One...</option>
-													@foreach(\App\Location::where('dest_type', @$fetchedData->type)->get() as $des)
-													<option value="{{@$des->id}}" <?php if($fetchedData->destination == $des->id){ echo 'selected'; } ?>>{{@$des->name}}</option>
-													@endforeach
-												</select>							
-												@if ($errors->has('destination'))
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="destination" class="col-sm-2 col-form-label">Destination
+													<span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													<select name="destination" data-valid="required" id="destination"
+														class="form-control" autocomplete="new-password">
+														<option value="">Choose One...</option>
+														@foreach(\App\Location::where('dest_type',
+														@$fetchedData->type)->get() as $des)
+														<option value="{{@$des->id}}" <?php if($fetchedData->destination
+															== $des->id){ echo 'selected'; } ?>>{{@$des->name}}</option>
+														@endforeach
+													</select>
+													@if ($errors->has('destination'))
 													<span class="custom-error" role="alert">
 														<strong>{{ @$errors->first('destination') }}</strong>
-													</span> 
-												@endif
-										   </div>	
-									  </div>
-									   <div class="form-group row">
-											<label for="city" class="col-sm-2 col-form-label">Departure/X-City <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-												<select name="city" data-valid ="required" id="city" class="form-control" autocomplete="new-password">
-													<option value="">Choose One...</option>													@foreach(\App\City::where('user_id',@Auth::user()->id)->orderby('name','ASC')->get() as $clist)
-														<option value="{{$clist->id}}" <?php if($fetchedData->city == $clist->id){ echo 'selected'; } ?>>{{$clist->name}}</option>
-													@endforeach
-												</select>							
-												@if ($errors->has('city'))
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="city" class="col-sm-2 col-form-label">Departure/X-City <span
+														style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													<select name="city" data-valid="required" id="city"
+														class="form-control" autocomplete="new-password">
+														<option value="">Choose One...</option>
+														@foreach(\App\City::where('user_id',@Auth::user()->id)->orderby('name','ASC')->get()
+														as $clist)
+														<option value="{{$clist->id}}" <?php if($fetchedData->city ==
+															$clist->id){ echo 'selected'; } ?>>{{$clist->name}}</option>
+														@endforeach
+													</select>
+													@if ($errors->has('city'))
 													<span class="custom-error" role="alert">
 														<strong>{{ @$errors->first('city') }}</strong>
-													</span> 
-												@endif
-										   </div>	
-									  </div>
-									  <div class="form-group" style="text-align:right;">
-										<a href="javascript:;"  datatypeid="departure_x_city" datatypemodel="Inclusionsopen_modal" class="openpopmodel"><i class="fa fa-plus"></i> Add new Departure/X-City</a>
-									  </div>
-									  <div class="form-group row"> 
-											<label for="package_name" class="col-sm-2 col-form-label">Package Name <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-											{{ Form::text('package_name', @$fetchedData->package_name, array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Package Name' )) }}
-											@if ($errors->has('package_name'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('package_name') }}</strong>
-												</span> 
-											@endif
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									   <div class="form-group row"> 
-											<label for="tour_code" class="col-sm-2 col-form-label">Tour Code </label>
-											<div class="col-sm-10">
-											{{ Form::text('tour_code', @$fetchedData->tour_code, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Tour Code' )) }}
-											@if ($errors->has('tour_code'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('tour_code') }}</strong>
-												</span> 
-											@endif
+											<div class="form-group" style="text-align:right;">
+												<a href="javascript:;" datatypeid="departure_x_city"
+													datatypemodel="Inclusionsopen_modal" class="openpopmodel"><i
+														class="fa fa-plus"></i> Add new Departure/X-City</a>
 											</div>
-									  </div>
-									  <div class="form-group row">
-											<label for="package_image_alt" class="col-sm-2 col-form-label">Image Alt</label>
-											<div class="col-sm-10">
-											{{ Form::text('package_image_alt', @$fetchedData->package_image_alt, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Image Alt' )) }}
-											@if ($errors->has('package_image_alt'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('package_image_alt') }}</strong>
-												</span> 
-											@endif
-										  </div>
-									  </div>
-									  <div class="form-group row">
-											<label for="package_image" class="col-sm-2 col-form-label">Package Image</label>
-											<div class="col-sm-10">
-											<?php $imagedata = \App\MediaImage::where('id',$fetchedData->package_image)->first();
+											<div class="form-group row">
+												<label for="package_name" class="col-sm-2 col-form-label">Package Name
+													<span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													{{ Form::text('package_name', @$fetchedData->package_name,
+													array('class' => 'form-control', 'data-valid'=>'required',
+													'autocomplete'=>'off','placeholder'=>'Enter Package Name' )) }}
+													@if ($errors->has('package_name'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('package_name') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="tour_code" class="col-sm-2 col-form-label">Tour Code
+												</label>
+												<div class="col-sm-10">
+													{{ Form::text('tour_code', @$fetchedData->tour_code, array('class'
+													=> 'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Enter Tour Code' )) }}
+													@if ($errors->has('tour_code'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('tour_code') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="package_image_alt" class="col-sm-2 col-form-label">Image
+													Alt</label>
+												<div class="col-sm-10">
+													{{ Form::text('package_image_alt', @$fetchedData->package_image_alt,
+													array('class' => 'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Enter Image Alt' )) }}
+													@if ($errors->has('package_image_alt'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('package_image_alt') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="package_image" class="col-sm-2 col-form-label">Package
+													Image</label>
+												<div class="col-sm-10">
+													<?php $imagedata = \App\MediaImage::where('id',$fetchedData->package_image)->first();
 												
 												?>
-												
-												<?php Controller::fileupload(@$imagedata->images,@$fetchedData->package_image,'package_image_id','package_img_name'); ?>
-												
+
+													<?php Controller::fileupload(@$imagedata->images,@$fetchedData->package_image,'package_image_id','package_img_name'); ?>
+
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row">
-											<label for="banner_image_m" class="col-sm-2 col-form-label">Banner Image (1500 X 500)</label>
-											<div class="col-sm-10">
-											<?php $imagedata = \App\MediaImage::where('id',$fetchedData->banner_image_m)->first();
+											<div class="form-group row">
+												<label for="banner_image_m" class="col-sm-2 col-form-label">Banner Image
+													(1500 X 500)</label>
+												<div class="col-sm-10">
+													<?php $imagedata = \App\MediaImage::where('id',$fetchedData->banner_image_m)->first();
 												
 												?>
-												
-												<?php Controller::fileupload(@$imagedata->images,@$fetchedData->banner_image_m,'banner_image_id','banner_img_name'); ?>
-												
+
+													<?php Controller::fileupload(@$imagedata->images,@$fetchedData->banner_image_m,'banner_image_id','banner_img_name'); ?>
+
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row">
-											<label for="package_overview" class="col-sm-2 col-form-label">Package Overview</label>
-											<div class="col-sm-10">
-												<textarea name="package_overview" data-valid ="" class="textarea" placeholder="Please Add Description Here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ @$fetchedData->package_overview }}</textarea>
-												@if ($errors->has('package_overview'))
+											<div class="form-group row">
+												<label for="package_overview" class="col-sm-2 col-form-label">Package
+													Overview</label>
+												<div class="col-sm-10">
+													<textarea name="package_overview" data-valid="" class="textarea"
+														placeholder="Please Add Description Here"
+														style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ @$fetchedData->package_overview }}</textarea>
+													@if ($errors->has('package_overview'))
 													<span class="custom-error" role="alert">
 														<strong>{{ @$errors->first('package_overview') }}</strong>
-													</span> 
-												@endif
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row"> 
-											<label for="package_validity" class="col-sm-2 col-form-label">Package Start Date</label>
-											<div class="col-sm-10">
-											{{ Form::text('package_validity', date('m/d/Y',strtotime(@$fetchedData->package_validity)), array('class' => 'form-control commondate', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Package Validity' )) }}
-											@if ($errors->has('package_validity'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('package_validity') }}</strong>
-												</span> 
+											<div class="form-group row">
+												<label for="package_validity" class="col-sm-2 col-form-label">Package
+													Start Date</label>
+												<div class="col-sm-10">
+													{{ Form::text('package_validity',
+													date('m/d/Y',strtotime(@$fetchedData->package_validity)),
+													array('class' => 'form-control commondate', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Enter Package Validity' )) }}
+													@if ($errors->has('package_validity'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('package_validity') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+											<?php $package_enddate = ''; ?>
+											@if(@$fetchedData->package_enddate != '')
+											<?php $package_enddate = date('m/d/Y',strtotime(@$fetchedData->package_enddate)); ?>
 											@endif
+											<div class="form-group row">
+												<label for="package_enddate" class="col-sm-2 col-form-label">Package End
+													Date</label>
+												<div class="col-sm-10">
+													{{ Form::text('package_enddate', @$package_enddate, array('class' =>
+													'form-control commondate', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Enter End Date' )) }}
+													<div class="calendar_icon"><i class="fa fa-calendar"></i></div>
+													@if ($errors->has('package_enddate'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('package_enddate') }}</strong>
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									  <?php $package_enddate = ''; ?>
-									  @if(@$fetchedData->package_enddate != '')
-										   <?php $package_enddate = date('m/d/Y',strtotime(@$fetchedData->package_enddate)); ?>
-										  @endif
-									  <div class="form-group row"> 
-											<label for="package_enddate" class="col-sm-2 col-form-label">Package End Date</label>
-											<div class="col-sm-10">
-											{{ Form::text('package_enddate', @$package_enddate, array('class' => 'form-control commondate', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter End Date' )) }}
-											<div class="calendar_icon"><i class="fa fa-calendar"></i></div>
-											@if ($errors->has('package_enddate'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('package_enddate') }}</strong>
-												</span> 
-											@endif
+											<div class="form-group row">
+												<label for="no_of_nights" class="col-sm-2 col-form-label">Number Of
+													Nights <span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													{{ Form::text('no_of_nights', @$fetchedData->no_of_nights,
+													array('class' => 'form-control', 'data-valid'=>'required',
+													'autocomplete'=>'off','placeholder'=>'Enter Number Of Nights',
+													'onkeypress'=>'return isNumberKey(event)' )) }}
+													@if ($errors->has('no_of_nights'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('no_of_nights') }}</strong>
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row"> 
-											<label for="no_of_nights" class="col-sm-2 col-form-label">Number Of Nights <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-											{{ Form::text('no_of_nights', @$fetchedData->no_of_nights, array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Number Of Nights', 'onkeypress'=>'return isNumberKey(event)' )) }}
-											@if ($errors->has('no_of_nights'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('no_of_nights') }}</strong>
-												</span> 
-											@endif
+											<div class="form-group row">
+												<label for="no_of_days" class="col-sm-2 col-form-label">Number Of Days
+													<span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													{{ Form::text('no_of_days', @$fetchedData->no_of_days, array('class'
+													=> 'form-control', 'data-valid'=>'required',
+													'autocomplete'=>'off','placeholder'=>'Enter Number Of Days',
+													'onkeypress'=>'return isNumberKey(event)' )) }}
+													@if ($errors->has('no_of_days'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('no_of_days') }}</strong>
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row"> 
-											<label for="no_of_days" class="col-sm-2 col-form-label">Number Of Days <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-											{{ Form::text('no_of_days', @$fetchedData->no_of_days, array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Number Of Days', 'onkeypress'=>'return isNumberKey(event)' )) }}
-											@if ($errors->has('no_of_days'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('no_of_days') }}</strong>
-												</span> 
-											@endif
+											<div class="form-group row">
+												<label for="details_day_night" class="col-sm-2 col-form-label">Details
+													Of Days and Nights <span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													{{ Form::text('details_day_night', @$fetchedData->details_day_night,
+													array('class' => 'form-control', 'data-valid'=>'required',
+													'autocomplete'=>'off','placeholder'=>'2 Nights Shimla + 2 Nights
+													Manali + 1 Night Chandigarh' )) }}
+													@if ($errors->has('details_day_night'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('details_day_night') }}</strong>
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									  <div class="form-group row"> 
-											<label for="details_day_night" class="col-sm-2 col-form-label">Details Of Days and Nights <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-											{{ Form::text('details_day_night', @$fetchedData->details_day_night, array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'2 Nights Shimla + 2 Nights Manali + 1 Night Chandigarh' )) }}
-											@if ($errors->has('details_day_night'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('details_day_night') }}</strong>
-												</span> 
-											@endif
+
+											<div class="form-group row">
+												<label for="support_no" class="col-sm-2 col-form-label">Support Number
+													<span style="color:#ff0000;">*</span></label>
+												<div class="col-sm-10">
+													{{ Form::text('support_no', @$fetchedData->support_no, array('class'
+													=> 'form-control', 'data-valid'=>'required',
+													'autocomplete'=>'off','placeholder'=>'Support Number' ,
+													'onkeypress'=>'return isNumberKey(event)')) }}
+													@if ($errors->has('support_no'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('support_no') }}</strong>
+													</span>
+													@endif
+												</div>
 											</div>
-									  </div>
-									    
-									  <div class="form-group row"> 
-											<label for="support_no" class="col-sm-2 col-form-label">Support Number <span style="color:#ff0000;">*</span></label>
-											<div class="col-sm-10">
-											{{ Form::text('support_no', @$fetchedData->support_no, array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Support Number' , 'onkeypress'=>'return isNumberKey(event)')) }}
-											@if ($errors->has('support_no'))
-												<span class="custom-error" role="alert">
-													<strong>{{ @$errors->first('support_no') }}</strong>
-												</span> 
-											@endif
-											</div>
-									  </div>
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-price" role="tabpanel" aria-labelledby="vert-tabs-price-tab">
-										<div class="form-group row">
-											<a href="javascript:;" class="addmyprice btn btn-primary"><i class="fa fa-plus"></i> Add Price</a>
 										</div>
-										<table class="table table-hover text-nowrap">
-											<thead>
-												<tr>
-													<th>Departure Date</th>
-													<th>Seats Available</th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody class="pricedata">
-											<?php $ipsb = 0; ?>
-											@foreach(\App\PackagePrice::where('package_id', $fetchedData->id)->get() as $pricelist)
-												<?php
+										<div class="tab-pane fade" id="vert-tabs-price" role="tabpanel"
+											aria-labelledby="vert-tabs-price-tab">
+											<div class="form-group row">
+												<a href="javascript:;" class="addmyprice btn btn-primary"><i
+														class="fa fa-plus"></i> Add Price</a>
+											</div>
+											<table class="table table-hover text-nowrap">
+												<thead>
+													<tr>
+														<th>Departure Date</th>
+														<th>Seats Available</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody class="pricedata">
+													<?php $ipsb = 0; ?>
+													@foreach(\App\PackagePrice::where('package_id',
+													$fetchedData->id)->get() as $pricelist)
+													<?php
 												$pricelist['priceid']=$pricelist->id;
 												$pricedata  = json_encode($pricelist,true);
 												
 												?>
-												<tr id="{{$ipsb}}">
-													<td>{{$pricelist->departure_date}}</td>
-													<td>{{$pricelist->no_of_seats}}</td>
-													<td><a href="javascript:;" class="remove_pricerow"><i class="fa fa-trash"></i></a>/<a  href="javascript:;" data-id="{{$pricelist->id}}" class="edit_pricerow"><i class="fa fa-edit"></i></a><input type="hidden" class="priceblo" name="dep_price[]" value="{{$pricedata}}"></td>
-												</tr>
-												<?php $ipsb++; ?>
-											@endforeach
-											</tbody>
-										</table>
-<input type="hidden" name="pricerem_id" id="pricerem_id" value="">										
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-flight" role="tabpanel" aria-labelledby="vert-tabs-flight-tab">		
-										<div class="form-group row"> 
-											<label for="flight_name" class="col-sm-2 col-form-label">Flight Name</label>
-											<div class="col-sm-10">
-											{{ Form::text('flight_name', @$fetchedData->flightname, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Flight Name', 'onkeypress'=>'' )) }}
-											
-											</div>
+													<tr id="{{$ipsb}}">
+														<td>{{$pricelist->departure_date}}</td>
+														<td>{{$pricelist->no_of_seats}}</td>
+														<td><a href="javascript:;" class="remove_pricerow"><i
+																	class="fa fa-trash"></i></a>/<a href="javascript:;"
+																data-id="{{$pricelist->id}}" class="edit_pricerow"><i
+																	class="fa fa-edit"></i></a><input type="hidden"
+																class="priceblo" name="dep_price[]"
+																value="{{$pricedata}}"></td>
+													</tr>
+													<?php $ipsb++; ?>
+													@endforeach
+												</tbody>
+											</table>
+											<input type="hidden" name="pricerem_id" id="pricerem_id" value="">
 										</div>
-										<div class="form-group row"> 
-											<label for="dep_city" class="col-sm-2 col-form-label">Departure City</label>
-											<div class="col-sm-10">
-											{{ Form::text('dep_city', @$fetchedData->dep_city, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Departure City', 'onkeypress'=>'' )) }}
-											
-											</div>
-										</div>
-										<div class="form-group row"> 
-											<label for="arv_city" class="col-sm-2 col-form-label">Arrival City</label>
-											<div class="col-sm-10">
-											{{ Form::text('arv_city', @$fetchedData->arv_city, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Arrival City', 'onkeypress'=>'' )) }}
-											
-											</div>
-										</div>
-										<div class="form-group row"> 
-											<label for="dep_time" class="col-sm-2 col-form-label">Departure Time</label>
-											<div class="col-sm-10">
-											{{ Form::text('dep_time', @$fetchedData->dep_time, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Departure Time', 'onkeypress'=>'' )) }}
-											
-											</div>
-										</div>
-										<div class="form-group row"> 
-											<label for="arv_time" class="col-sm-2 col-form-label">Arrival Time</label>
-											<div class="col-sm-10">
-											{{ Form::text('arv_time', @$fetchedData->arv_time, array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Arrival Time', 'onkeypress'=>'' )) }}
-											</div>
-										</div>
-								  
-								  </div>
-								  
-								  <div class="tab-pane fade" id="vert-tabs-addon" role="tabpanel" aria-labelledby="vert-tabs-addon-tab">
-									<div class="form-group row">
-											<label for="package_addons" class="col-sm-2 col-form-label">Addons</label>
-			<div class="col-sm-10">
-				<select name="package_addons[]" id="package_addons" class="select2" multiple="multiple" data-placeholder="Select Addons" style="width: 100%;">
-					@if(count(@$addon) !== 0)
-						@foreach (@$addon as $addo)
-					<?php $addons = explode(',', $fetchedData->addon); ?>
-							<option value="{{ @$addo->id }}" <?php if(in_array($addo->id,$addons)){ echo 'selected';  } ?>>{{ @$addo->title }}</option>
-						@endforeach
-					@endif 
-				</select> 
-			</div>
-										</div>
-										 <div class="form-group" style="text-align:right;">
-										
-									  </div>
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-packtheme" role="tabpanel" aria-labelledby="vert-tabs-packtheme-tab">	@include('Admin.manageholidaypackage.inc.package_theme')
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-itinerary" role="tabpanel" aria-labelledby="vert-tabs-itinerary-tab"> @include('Admin.manageholidaypackage.inc.itinerary')
-								  </div> 
-								  <div class="tab-pane fade" id="vert-tabs-hotel" role="tabpanel" aria-labelledby="vert-tabs-hotel-tab">
-									  @include('Admin.manageholidaypackage.inc.hotel')
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-inclusions" role="tabpanel" aria-labelledby="vert-tabs-inclusions-tab">
-										
-									   <h4>Inclusions</h4>
-										<div class="myinclusion">
-										@if($fetchedData->package_inclusions != '')
-											<?php $inclusio = explode('~', $fetchedData->package_inclusions); ?>
-										@foreach (@$inclusio as $inclu)
+										<div class="tab-pane fade" id="vert-tabs-flight" role="tabpanel"
+											aria-labelledby="vert-tabs-flight-tab">
 											<div class="form-group row">
+												<label for="flight_name" class="col-sm-2 col-form-label">Flight
+													Name</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" name="package_inclusions[]" value="{{$inclu}}">			
+													{{ Form::text('flight_name', @$fetchedData->flightname,
+													array('class' => 'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Flight Name', 'onkeypress'=>''
+													)) }}
+
 												</div>
-												<div class="col-sm-2"><a href="javascript:;" class="remitenry"><i class="fa fa-times"></i></a></div>												
 											</div>
-										@endforeach
-										@else
 											<div class="form-group row">
+												<label for="dep_city" class="col-sm-2 col-form-label">Departure
+													City</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" name="package_inclusions[]" value="">			
-												</div>			 								
-											</div>	
-										@endif
+													{{ Form::text('dep_city', @$fetchedData->dep_city, array('class' =>
+													'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Departure City',
+													'onkeypress'=>'' )) }}
+
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="arv_city" class="col-sm-2 col-form-label">Arrival
+													City</label>
+												<div class="col-sm-10">
+													{{ Form::text('arv_city', @$fetchedData->arv_city, array('class' =>
+													'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Arrival City',
+													'onkeypress'=>'' )) }}
+
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="dep_time" class="col-sm-2 col-form-label">Departure
+													Time</label>
+												<div class="col-sm-10">
+													{{ Form::text('dep_time', @$fetchedData->dep_time, array('class' =>
+													'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Departure Time',
+													'onkeypress'=>'' )) }}
+
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="arv_time" class="col-sm-2 col-form-label">Arrival
+													Time</label>
+												<div class="col-sm-10">
+													{{ Form::text('arv_time', @$fetchedData->arv_time, array('class' =>
+													'form-control', 'data-valid'=>'',
+													'autocomplete'=>'off','placeholder'=>'Arrival Time',
+													'onkeypress'=>'' )) }}
+												</div>
+											</div>
+
 										</div>
-									  <div class="form-group" style="text-align:right;">
-										<a href="javascript:;"  class="btn btn-primary addinclusion"><i class="fa fa-plus"></i> Add New</a>
-									  </div>
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-topinclusions" role="tabpanel" aria-labelledby="vert-tabs-topinclusions-tab">
-										<div class="form-group row">
-											<label for="package_topinclusions" class="col-sm-2 col-form-label">Top Inclusions</label>
-											<div class="col-sm-10">
-												<select id="packagetopinclusions" name="package_topinclusions[]" class="select2" multiple="multiple" data-placeholder="Select Top Inclusions" style="width: 100%;">
-													@if(count(@$topinclusion) !== 0)
-														<?php $topinclusio = explode(',', $fetchedData->package_topinclusions); ?>
-														@foreach (@$topinclusion as $topinclu)
-															<option value="{{ @$topinclu->id }}" <?php if(in_array($topinclu->id,$topinclusio)){ echo 'selected';  } ?>  >{{ @$topinclu->name }}</option>
+
+										<div class="tab-pane fade" id="vert-tabs-addon" role="tabpanel"
+											aria-labelledby="vert-tabs-addon-tab">
+											<div class="form-group row">
+												<label for="package_addons"
+													class="col-sm-2 col-form-label">Addons</label>
+												<div class="col-sm-10">
+													<select name="package_addons[]" id="package_addons" class="select2"
+														multiple="multiple" data-placeholder="Select Addons"
+														style="width: 100%;">
+														@if(count(@$addon) !== 0)
+														@foreach (@$addon as $addo)
+														<?php $addons = explode(',', $fetchedData->addon); ?>
+														<option value="{{ @$addo->id }}" <?php if(in_array($addo->
+															id,$addons)){ echo 'selected'; } ?>>{{ @$addo->title }}
+														</option>
 														@endforeach
-													@endif 
-												</select>								
-												@if ($errors->has('package_topinclusions'))
-													<span class="custom-error" role="alert">
-														<strong>{{ @$errors->first('package_topinclusions') }}</strong>
-													</span> 
-												@endif
+														@endif
+													</select>
+												</div>
+											</div>
+											<div class="form-group" style="text-align:right;">
+
 											</div>
 										</div>
-										 <div class="form-group" style="text-align:right;">
-										<a href="javascript:;" datatypeid="topinclusion" datatypemodel="Inclusionsopen_modal" class="openpopmodel"><i class="fa fa-plus"></i> Add new Top Inclusions</a>
-									  </div>
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-exclusions" role="tabpanel" aria-labelledby="vert-tabs-exclusions-tab">
-									 <h4>Exclusions</h4>
-										<div class="myeclusion">
-										@if($fetchedData->package_exclusions != '')
-											<?php $exclusion = explode('~', $fetchedData->package_exclusions); ?>
-										@foreach (@$exclusion as $exclu)
-											<div class="form-group row">
-												<div class="col-sm-10">
-													<input type="text" class="form-control" name="package_exclusions[]" value="{{$exclu}}">			
-												</div>	
-												<div class="col-sm-2"><a href="javascript:;" class="remexitenry"><i class="fa fa-times"></i></a></div>		
-											</div>
-										@endforeach
-										@else
-											<div class="form-group row">
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="package_exclusions[]" value="">			
-													</div>			 								
-												</div>	
-										@endif
+										<div class="tab-pane fade" id="vert-tabs-packtheme" role="tabpanel"
+											aria-labelledby="vert-tabs-packtheme-tab">
+											@include('Admin.manageholidaypackage.inc.package_theme')
 										</div>
-									  <div class="form-group" style="text-align:right;">
-										<a href="javascript:;"  class="btn btn-primary addeclusion"><i class="fa fa-plus"></i> Add New</a>
-									  </div>
-										
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-tourpolicy" role="tabpanel" aria-labelledby="vert-tabs-tourpolicy-tab">
-										<h4>Tour Policy</h4>
-										<div class="mypolicy">
-											@if($fetchedData->package_tourpolicy != '')
-												<?php $package_tourpolicy = explode('~', $fetchedData->package_tourpolicy); ?>
-											@foreach (@$package_tourpolicy as $packagetourpolicy)
+										<div class="tab-pane fade" id="vert-tabs-itinerary" role="tabpanel"
+											aria-labelledby="vert-tabs-itinerary-tab">
+											@include('Admin.manageholidaypackage.inc.itinerary')
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-hotel" role="tabpanel"
+											aria-labelledby="vert-tabs-hotel-tab">
+											@include('Admin.manageholidaypackage.inc.hotel')
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-inclusions" role="tabpanel"
+											aria-labelledby="vert-tabs-inclusions-tab">
+
+											<h4>Inclusions</h4>
+											<div class="myinclusion">
+												@if($fetchedData->package_inclusions != '')
+												<?php $inclusio = explode('~', $fetchedData->package_inclusions); ?>
+												@foreach (@$inclusio as $inclu)
 												<div class="form-group row">
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="tour_policy[]" value="{{@$packagetourpolicy}}">			
-													</div>	
-													<div class="col-sm-2"><a href="javascript:;" class="rempolicy"><i class="fa fa-times"></i></a></div>													
+														<input type="text" class="form-control"
+															name="package_inclusions[]" value="{{$inclu}}">
+													</div>
+													<div class="col-sm-2"><a href="javascript:;" class="remitenry"><i
+																class="fa fa-times"></i></a></div>
 												</div>
-											@endforeach
-											@else
-													<div class="form-group row">
+												@endforeach
+												@else
+												<div class="form-group row">
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="tour_policy[]" value="">			
-													</div>			 								
+														<input type="text" class="form-control"
+															name="package_inclusions[]" value="">
+													</div>
 												</div>
-											@endif
-											</div>
-										  <div class="form-group" style="text-align:right;">
-											<a href="javascript:;"  class="btn btn-primary addpolicy"><i class="fa fa-plus"></i> Add New</a>
-										  </div>
-										
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-galleryimg" role="tabpanel" aria-labelledby="vert-tabs-galleryimg-tab">
-									  @include('Admin.manageholidaypackage.inc.gallery')
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-metatag" role="tabpanel" aria-labelledby="vert-tabs-metatag-tab">
-									  @include('Admin.manageholidaypackage.inc.metatag')
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-metasearch" role="tabpanel" aria-labelledby="vert-tabs-metasearch-tab">
-									  @include('Admin.manageholidaypackage.inc.metasearch')
-								  </div>
-								  <div class="tab-pane fade" id="vert-tabs-pdf" role="tabpanel" aria-labelledby="vert-tabs-pdf-tab">
-										<div class="form-group row">
-											<label for="pdf" class="col-sm-2 col-form-label">PDF</label>
-											<div class="col-sm-10">
-												<input type="hidden" id="old_pdf" name="old_pdf" value="{{@$fetchedData->pdf}}" /> 
-												<div class="show_custom_file_error"></div>
-												<input id="pdfdoc" type="file" accept="application/pdf" name="pdf" class="form-control" autocomplete="off" data-valid="" />
-												<div class="pdf_link">
-													<a target="_blank" href="{{URL::to('/public/img/pdfs')}}/{{@$fetchedData->pdf}}">{{@$fetchedData->pdf}}</a>
-												</div>
-												
-												@if ($errors->has('pdf'))
-													<span class="custom-error" role="alert">
-														<strong>{{ @$errors->first('pdf') }}</strong>
-													</span> 
 												@endif
 											</div>
+											<div class="form-group" style="text-align:right;">
+												<a href="javascript:;" class="btn btn-primary addinclusion"><i
+														class="fa fa-plus"></i> Add New</a>
+											</div>
 										</div>
-								  </div>
-								  
+										<div class="tab-pane fade" id="vert-tabs-topinclusions" role="tabpanel"
+											aria-labelledby="vert-tabs-topinclusions-tab">
+											<div class="form-group row">
+												<label for="package_topinclusions" class="col-sm-2 col-form-label">Top
+													Inclusions</label>
+												<div class="col-sm-10">
+													<select id="packagetopinclusions" name="package_topinclusions[]"
+														class="select2" multiple="multiple"
+														data-placeholder="Select Top Inclusions" style="width: 100%;">
+														@if(count(@$topinclusion) !== 0)
+														<?php $topinclusio = explode(',', $fetchedData->package_topinclusions); ?>
+														@foreach (@$topinclusion as $topinclu)
+														<option value="{{ @$topinclu->id }}" <?php
+															if(in_array($topinclu->id,$topinclusio)){ echo 'selected'; }
+															?> >{{ @$topinclu->name }}</option>
+														@endforeach
+														@endif
+													</select>
+													@if ($errors->has('package_topinclusions'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('package_topinclusions') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+											<div class="form-group" style="text-align:right;">
+												<a href="javascript:;" datatypeid="topinclusion"
+													datatypemodel="Inclusionsopen_modal" class="openpopmodel"><i
+														class="fa fa-plus"></i> Add new Top Inclusions</a>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-exclusions" role="tabpanel"
+											aria-labelledby="vert-tabs-exclusions-tab">
+											<h4>Exclusions</h4>
+											<div class="myeclusion">
+												@if($fetchedData->package_exclusions != '')
+												<?php $exclusion = explode('~', $fetchedData->package_exclusions); ?>
+												@foreach (@$exclusion as $exclu)
+												<div class="form-group row">
+													<div class="col-sm-10">
+														<input type="text" class="form-control"
+															name="package_exclusions[]" value="{{$exclu}}">
+													</div>
+													<div class="col-sm-2"><a href="javascript:;" class="remexitenry"><i
+																class="fa fa-times"></i></a></div>
+												</div>
+												@endforeach
+												@else
+												<div class="form-group row">
+													<div class="col-sm-10">
+														<input type="text" class="form-control"
+															name="package_exclusions[]" value="">
+													</div>
+												</div>
+												@endif
+											</div>
+											<div class="form-group" style="text-align:right;">
+												<a href="javascript:;" class="btn btn-primary addeclusion"><i
+														class="fa fa-plus"></i> Add New</a>
+											</div>
+
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-tourpolicy" role="tabpanel"
+											aria-labelledby="vert-tabs-tourpolicy-tab">
+											<h4>Tour Policy</h4>
+											<div class="mypolicy">
+												@if($fetchedData->package_tourpolicy != '')
+												<?php $package_tourpolicy = explode('~', $fetchedData->package_tourpolicy); ?>
+												@foreach (@$package_tourpolicy as $packagetourpolicy)
+												<div class="form-group row">
+													<div class="col-sm-10">
+														<input type="text" class="form-control" name="tour_policy[]"
+															value="{{@$packagetourpolicy}}">
+													</div>
+													<div class="col-sm-2"><a href="javascript:;" class="rempolicy"><i
+																class="fa fa-times"></i></a></div>
+												</div>
+												@endforeach
+												@else
+												<div class="form-group row">
+													<div class="col-sm-10">
+														<input type="text" class="form-control" name="tour_policy[]"
+															value="">
+													</div>
+												</div>
+												@endif
+											</div>
+											<div class="form-group" style="text-align:right;">
+												<a href="javascript:;" class="btn btn-primary addpolicy"><i
+														class="fa fa-plus"></i> Add New</a>
+											</div>
+
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-galleryimg" role="tabpanel"
+											aria-labelledby="vert-tabs-galleryimg-tab">
+											@include('Admin.manageholidaypackage.inc.gallery')
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-metatag" role="tabpanel"
+											aria-labelledby="vert-tabs-metatag-tab">
+											@include('Admin.manageholidaypackage.inc.metatag')
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-metasearch" role="tabpanel"
+											aria-labelledby="vert-tabs-metasearch-tab">
+											@include('Admin.manageholidaypackage.inc.metasearch')
+										</div>
+										<div class="tab-pane fade" id="vert-tabs-pdf" role="tabpanel"
+											aria-labelledby="vert-tabs-pdf-tab">
+											<div class="form-group row">
+												<label for="pdf" class="col-sm-2 col-form-label">PDF</label>
+												<div class="col-sm-10">
+													<input type="hidden" id="old_pdf" name="old_pdf"
+														value="{{@$fetchedData->pdf}}" />
+													<div class="show_custom_file_error"></div>
+													<input id="pdfdoc" type="file" accept="application/pdf" name="pdf"
+														class="form-control" autocomplete="off" data-valid="" />
+													<div class="pdf_link">
+														<a target="_blank"
+															href="{{URL::to('/public/img/pdfs')}}/{{@$fetchedData->pdf}}">{{@$fetchedData->pdf}}</a>
+													</div>
+
+													@if ($errors->has('pdf'))
+													<span class="custom-error" role="alert">
+														<strong>{{ @$errors->first('pdf') }}</strong>
+													</span>
+													@endif
+												</div>
+											</div>
+										</div>
+
+									</div>
 								</div>
-							  </div>
 							</div>
-						  
+
 							<div class="package_full_form" style="text-align: right;">
-							  <div class="form-group">
-								{{ Form::button('<i class="fa fa-edit"></i> Update package', ['class'=>'btn btn-primary', 'id'=>'savebtn', 'onClick'=>'customValidate("edit-package")' ]) }}
-							  </div> 
-							 </div> 
-						</div> 
-					  {{ Form::close() }}
-					</div>	
-				</div>	
+								<div class="form-group">
+									{{ Form::button('<i class="fa fa-edit"></i> Update package', ['class'=>'btn
+									btn-primary', 'id'=>'savebtn', 'onClick'=>'customValidate("edit-package")' ]) }}
+								</div>
+							</div>
+						</div>
+						{{ Form::close() }}
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -538,48 +709,51 @@
 <div class="modal fade" id="Inclusionsopen_modal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-		
+
 			<div class="modal-header">
-			  <h4 class="modal-title">Add New</h4>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
+				<h4 class="modal-title">Add New</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-			{{ Form::open(array('url' => 'add_inclusion', 'id'=>"addnewdatapackage", 'autocomplete'=>'off', "enctype"=>"multipart/form-data")) }}
+			{{ Form::open(array('url' => 'add_inclusion', 'id'=>"addnewdatapackage", 'autocomplete'=>'off',
+			"enctype"=>"multipart/form-data")) }}
 			<div class="modal-body">
 				<div class="inclusion-error"></div>
-				<div class="form-group row"> 
+				<div class="form-group row">
 					<label for="name" class="col-sm-2 col-form-label">Name <span style="color:#ff0000;">*</span></label>
 					<div class="col-sm-10">
-					<input type="hidden" id="savetype" name="savetype">
-					{{ Form::text('inclusion_Name', '', array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Name','id'=>'inclusion_Name' )) }}
-					@if ($errors->has('name'))
+						<input type="hidden" id="savetype" name="savetype">
+						{{ Form::text('inclusion_Name', '', array('class' => 'form-control', 'data-valid'=>'required',
+						'autocomplete'=>'off','placeholder'=>'Enter Name','id'=>'inclusion_Name' )) }}
+						@if ($errors->has('name'))
 						<span class="custom-error" role="alert">
 							<strong>{{ @$errors->first('name') }}</strong>
-						</span> 
-					@endif
+						</span>
+						@endif
 					</div>
-			  </div>
-			  <div class="form-group row displayiftopinclusion" style="display:none"> 
-					<label for="name" class="col-sm-2 col-form-label">Image <span style="color:#ff0000;">*</span></label>
+				</div>
+				<div class="form-group row displayiftopinclusion" style="display:none">
+					<label for="name" class="col-sm-2 col-form-label">Image <span
+							style="color:#ff0000;">*</span></label>
 					<div class="col-sm-10">
-					<input type="file" id="fileimage" name="image" class="form-control" autocomplete="off"  />
-						
+						<input type="file" id="fileimage" name="image" class="form-control" autocomplete="off" />
+
 					</div>
-			  </div>
+				</div>
 			</div>
 			<div class="modal-footer justify-content-between">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="button" id="save_Inclusion" class="btn btn-primary">Save</button>
 			</div>
-		{{ Form::close() }}
+			{{ Form::close() }}
 		</div>
 	</div>
 </div>
 @endsection
 @section('scripts')
 <script>
-jQuery(document).ready(function($){
+	jQuery(document).ready(function($){
 	$(document).delegate('.addinclusion', 'click', function(){
 		$('.myinclusion').append('<div class="form-group row"><div class="col-sm-10"><input type="text" class="form-control" name="package_inclusions[]" value=""></div><div class="col-sm-2"><a href="javascript:;" class="remitenry"><i class="fa fa-times"></i></a></div></div>');
 	});
@@ -809,187 +983,228 @@ $(this).parent().parent().remove();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Add Price</h4>
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
-				  </button>
+				</button>
 			</div>
 			<form action="" method="post" id="saveprice" name="saveprice">
-			
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group row">
-							<label for="departure_date" class="col-sm-3 col-form-label">Departure Date</label>
-							<div class="col-sm-9">
-								{{ Form::text('departure_date', '', array('class' => 'form-control commondydate', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Departure Date', 'onkeypress'=>'return isNumberKey(event)' )) }}
+
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group row">
+								<label for="departure_date" class="col-sm-3 col-form-label">Departure Date</label>
+								<div class="col-sm-9">
+									{{ Form::text('departure_date', '', array('class' => 'form-control commondydate',
+									'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Enter Departure
+									Date', 'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="seats" class="col-sm-3 col-form-label">Total Seat Available</label>
+								<div class="col-sm-9">
+									{{ Form::text('seats', '', array('class' => 'form-control',
+									'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Total Seat
+									Available', 'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="twin" class="col-sm-3 col-form-label">Twin</label>
+								<div class="col-sm-9">
+									{{ Form::text('twin', '', array('class' => 'form-control', 'data-valid'=>'required',
+									'autocomplete'=>'off','placeholder'=>'twin Price', 'onkeypress'=>'return
+									isNumberKey(event)' )) }}
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="triple" class="col-sm-3 col-form-label">Triple</label>
+								<div class="col-sm-9">
+									{{ Form::text('triple', '', array('class' => 'form-control',
+									'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Tripple Price',
+									'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="single" class="col-sm-3 col-form-label">Single</label>
+								<div class="col-sm-9">
+									{{ Form::text('single', '', array('class' => 'form-control',
+									'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'single',
+									'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="child_with_bed" class="col-sm-3 col-form-label">Child with Bed (below 12
+									years)</label>
+								<div class="col-sm-9">
+									{{ Form::text('child_with_bed', '', array('class' => 'form-control',
+									'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child with Bed (below 12
+									years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="child_without_bedbelow12" class="col-sm-3 col-form-label">Child without Bed
+									(below 12 years)</label>
+								<div class="col-sm-9">
+									{{ Form::text('child_without_bedbelow12', '', array('class' => 'form-control',
+									'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child without Bed (below 12
+									years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="child_without_bedbelow26" class="col-sm-3 col-form-label">Child without Bed
+									(below 2-3 years)</label>
+								<div class="col-sm-9">
+									{{ Form::text('child_without_bedbelow26', '', array('class' => 'form-control',
+									'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child without Bed (below 2-3
+									years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="infant" class="col-sm-3 col-form-label">Infant</label>
+								<div class="col-sm-9">
+									{{ Form::text('infant', '', array('class' => 'form-control', 'data-valid'=>'',
+									'autocomplete'=>'off','placeholder'=>'Infant', 'onkeypress'=>'return
+									isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="adult_flight" class="col-sm-3 col-form-label">Adult (Flight Only)</label>
+								<div class="col-sm-9">
+									{{ Form::text('adult_flight', '', array('class' => 'form-control', 'data-valid'=>'',
+									'autocomplete'=>'off','placeholder'=>'Adult (Flight Only)', 'onkeypress'=>'return
+									isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="child_flight" class="col-sm-3 col-form-label">Child (Flight Only)</label>
+								<div class="col-sm-9">
+									{{ Form::text('child_flight', '', array('class' => 'form-control', 'data-valid'=>'',
+									'autocomplete'=>'off','placeholder'=>'Child (Flight Only)', 'onkeypress'=>'return
+									isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="infant_flight" class="col-sm-3 col-form-label">Infant (Flight Only)</label>
+								<div class="col-sm-9">
+									{{ Form::text('infant_flight', '', array('class' => 'form-control',
+									'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Infant (Flight Only)',
+									'onkeypress'=>'return isNumberKey(event)' )) }}
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="price_type" class="col-sm-3 col-form-label">Price Type</label>
+								<div class="col-sm-9">
+									<select class="form-control price_type" name="price_type">
+										<option value="Per Person">Per Person</option>
+										<option value="Twin Sharing">Twin Sharing</option>
+										<option value="Triple Sharing">Triple Sharing</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="booking_amt" class="col-sm-3 col-form-label">Booking Amount</label>
+								<div class="col-sm-3">
+									<input type="text" onkeypress='return isNumberKey(event)' class="form-control"
+										name="booking_amt">
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control dis_type" name="dis_type">
+										<option value="Percentage">Percentage</option>
+										<option value="Fixed">Fixed</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="balance_rec" class="col-sm-3 col-form-label">Balance Receiving Day</label>
+								<div class="col-sm-9">
+									<select class="form-control balance_rec" name="balance_rec">
+										<option value=""></option>
+										<?php for($i = 1; $i<=10; $i++){ ?>
+										<option value="{{$i}}">{{$i}}</option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="balance_rec" class="col-sm-3 col-form-label"></label>
+								<div class="col-sm-9">
+									<label><input checked type="radio" name="flight_type" class="flighttyp" value="0">
+										Same Flight</label>
+									<label><input type="radio" name="flight_type" class="flighttyp" value="1"> Add
+										Flight</label>
+								</div>
+							</div>
+							<div class="if_diffrent_flight" style="display:none;">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group row">
+											<label for="flightname" class="col-sm-3 col-form-label">Flight Name</label>
+											<div class="col-sm-9">
+												{{ Form::text('flightname', '', array('class' => 'form-control ',
+												'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Flight
+												Name', 'onkeypress'=>'' )) }}
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group row">
+											<label for="dep_city" class="col-sm-3 col-form-label">Departure City</label>
+											<div class="col-sm-9">
+												{{ Form::text('dep_city', '', array('class' => 'form-control ',
+												'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Departure
+												City', 'onkeypress'=>'' )) }}
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group row">
+											<label for="arv_city" class="col-sm-3 col-form-label">Arrival City</label>
+											<div class="col-sm-9">
+												{{ Form::text('arv_city', '', array('class' => 'form-control ',
+												'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Arrival
+												City', 'onkeypress'=>'' )) }}
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group row">
+											<label for="dep_time" class="col-sm-3 col-form-label">Departure Time</label>
+											<div class="col-sm-9">
+												{{ Form::text('dep_time', '', array('class' => 'form-control ',
+												'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Departure
+												Time', 'onkeypress'=>'' )) }}
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group row">
+											<label for="arv_time" class="col-sm-3 col-form-label">Arrival Time</label>
+											<div class="col-sm-9">
+												{{ Form::text('arv_time', '', array('class' => 'form-control ',
+												'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Arrival
+												Time', 'onkeypress'=>'' )) }}
+											</div>
+											<input type="hidden" id="priceid" data-id="{{@$fetchedData['id']}}"
+												name="priceid">
+
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="seats" class="col-sm-3 col-form-label">Total Seat Available</label>
-							<div class="col-sm-9">
-								{{ Form::text('seats', '', array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Total Seat Available', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-						</div>
-				
-						<div class="form-group row"> 
-							<label for="twin" class="col-sm-3 col-form-label">Twin</label>
-							<div class="col-sm-9">
-							{{ Form::text('twin', '', array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'twin Price', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-				
-						<div class="form-group row"> 
-							<label for="triple" class="col-sm-3 col-form-label">Triple</label>
-							<div class="col-sm-9">
-							{{ Form::text('triple', '', array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'Tripple Price', 'onkeypress'=>'return isNumberKey(event)' )) }}							
-							</div>
-						</div>
-					<div class="form-group row"> 
-							<label for="single" class="col-sm-3 col-form-label">Single</label>
-							<div class="col-sm-9">
-							{{ Form::text('single', '', array('class' => 'form-control', 'data-valid'=>'required', 'autocomplete'=>'off','placeholder'=>'single', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  
-					  <div class="form-group row"> 
-							<label for="child_with_bed" class="col-sm-3 col-form-label">Child with Bed (below 12 years)</label>
-							<div class="col-sm-9">
-							{{ Form::text('child_with_bed', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child with Bed (below 12 years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="child_without_bedbelow12" class="col-sm-3 col-form-label">Child without Bed (below 12 years)</label>
-							<div class="col-sm-9">
-							{{ Form::text('child_without_bedbelow12', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child without Bed (below 12 years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="child_without_bedbelow26" class="col-sm-3 col-form-label">Child without Bed (below 2-3 years)</label>
-							<div class="col-sm-9">
-							{{ Form::text('child_without_bedbelow26', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child without Bed (below 2-3 years)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="infant" class="col-sm-3 col-form-label">Infant</label>
-							<div class="col-sm-9">
-							{{ Form::text('infant', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Infant', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="adult_flight" class="col-sm-3 col-form-label">Adult (Flight Only)</label>
-							<div class="col-sm-9">
-							{{ Form::text('adult_flight', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Adult (Flight Only)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="child_flight" class="col-sm-3 col-form-label">Child (Flight Only)</label>
-							<div class="col-sm-9">
-							{{ Form::text('child_flight', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Child (Flight Only)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row"> 
-							<label for="infant_flight" class="col-sm-3 col-form-label">Infant (Flight Only)</label>
-							<div class="col-sm-9">
-							{{ Form::text('infant_flight', '', array('class' => 'form-control', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Infant (Flight Only)', 'onkeypress'=>'return isNumberKey(event)' )) }}
-							</div>
-					  </div>
-					  <div class="form-group row">
-							<label for="price_type" class="col-sm-3 col-form-label">Price Type</label>
-							<div class="col-sm-9">
-							<select class="form-control price_type" name="price_type">
-								<option value="Per Person">Per Person</option>
-								<option value="Twin Sharing">Twin Sharing</option>
-								<option value="Triple Sharing">Triple Sharing</option>
-							</select>
-						  </div>
-					 </div>
-					 <div class="form-group row">
-						<label for="booking_amt" class="col-sm-3 col-form-label">Booking Amount</label>
-							<div class="col-sm-3">
-								<input type="text" onkeypress='return isNumberKey(event)' class="form-control" name="booking_amt">
-							</div>
-							<div class="col-sm-3">
-								<select class="form-control dis_type" name="dis_type">
-									<option value="Percentage">Percentage</option>
-									<option value="Fixed">Fixed</option>
-								</select>
-							</div>
 					</div>
-					  <div class="form-group row">
-							<label for="balance_rec" class="col-sm-3 col-form-label">Balance Receiving Day</label>
-							<div class="col-sm-9">
-								<select class="form-control balance_rec" name="balance_rec">
-									<option value=""></option>
-									<?php for($i = 1; $i<=10; $i++){ ?>
-									<option value="{{$i}}">{{$i}}</option>
-									<?php } ?>
-								</select>
-							</div>
-					  </div>
-					   <div class="form-group row">
-							<label for="balance_rec" class="col-sm-3 col-form-label"></label>
-							<div class="col-sm-9">
-								<label><input checked type="radio" name="flight_type" class="flighttyp" value="0"> Same Flight</label>
-								<label><input type="radio" name="flight_type" class="flighttyp" value="1"> Add Flight</label>
-							</div>
-					  </div>
-					  <div class="if_diffrent_flight" style="display:none;">
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="form-group row">
-										<label for="flightname" class="col-sm-3 col-form-label">Flight Name</label>
-										<div class="col-sm-9">
-											{{ Form::text('flightname', '', array('class' => 'form-control ', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Flight Name', 'onkeypress'=>'' )) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group row">
-										<label for="dep_city" class="col-sm-3 col-form-label">Departure City</label>
-										<div class="col-sm-9">
-											{{ Form::text('dep_city', '', array('class' => 'form-control ', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Departure City', 'onkeypress'=>'' )) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group row">
-										<label for="arv_city" class="col-sm-3 col-form-label">Arrival City</label>
-										<div class="col-sm-9">
-											{{ Form::text('arv_city', '', array('class' => 'form-control ', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Arrival City', 'onkeypress'=>'' )) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group row">
-										<label for="dep_time" class="col-sm-3 col-form-label">Departure Time</label>
-										<div class="col-sm-9">
-											{{ Form::text('dep_time', '', array('class' => 'form-control ', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Departure Time', 'onkeypress'=>'' )) }}
-										</div>
-									</div> 
-								</div>
-								
-								<div class="col-sm-4">
-									<div class="form-group row">
-										<label for="arv_time" class="col-sm-3 col-form-label">Arrival Time</label>
-										<div class="col-sm-9">
-											{{ Form::text('arv_time', '', array('class' => 'form-control ', 'data-valid'=>'', 'autocomplete'=>'off','placeholder'=>'Enter Arrival Time', 'onkeypress'=>'' )) }}
-										</div>
-										<input type="hidden" id="priceid" data-id="{{@$fetchedData['id']}}"  name="priceid"  >
-										
-									</div>
-								</div>
-							</div>
-						</div>
 				</div>
-			</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="save_price" class="btn btn-primary">Save</button>
+					<button type="button" id="update_price" style="display:none" class="btn btn-primary">Update</button>
+				</div>
+			</form>
 		</div>
-		<div class="modal-footer justify-content-between">
-		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		  <button type="button" id="save_price" class="btn btn-primary">Save</button>
-		  <button type="button" id="update_price" style="display:none" class="btn btn-primary">Update</button>
-		</div>
-		</form>
 	</div>
-</div>
 </div>
 @endsection

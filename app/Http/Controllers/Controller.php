@@ -1627,7 +1627,8 @@ public function AdminPhoneBookingTicket($id, $message, $pd = 0){
 		$('#cdn-browser-modal').modal('show');
 		$('#cdn-browser').addClass('is_loading');
 		$.ajax({
-			url:'<?php echo \URL::to('/admin')?>/photo-gallery/getlist',
+			url:'/photo-gallery/getlist',
+			// url:'<?php echo \URL::to('/admin')?>/photo-gallery/getlist',
              type:'get',
 			 data:{page:1, fieldname:'<?php echo $fieldname; ?>'},
 			success:function(res){
