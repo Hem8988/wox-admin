@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Route;
 
-use App\Visa;
+use App\VisaEnquires;
 use App\FlightDetail;
 use App\ApiDetail;
 use App\User;
 
 use Auth;
 use Config;
+use DB;
 
 class VisaController extends Controller
 {
@@ -73,20 +74,9 @@ class VisaController extends Controller
 		return view('Admin.flightdetail.show',compact(['lists', 'totalData','type']));	
 	}
 	public function index(Request $request)
-	{
-		//check authorization start	
-			/*  $check = $this->checkAuthorizationAction('cmspages', $request->route()->getActionMethod(), Auth::user()->role);
-			if($check)
-			{
-				return Redirect::to('/dashboard')->with('error',config('constants.unauthorized'));
-			}	  */
-		//check authorization end
-	
-		 $query 		= Visa::where('id', '!=', '');
-		
-		$totalData 	= $query->count();	//for all data
-		$lists		= $query->orderby('created_at','desc')->get();
-		return view('Admin.visa.indexapis',compact(['lists', 'totalData']));	
+	{ 
+		$lists = DB::table('visa_enquries')->get();
+		return view('Admin.visa.indexapis',compact(['lists']));	
 	}
 	
 	public function create(Request $request)

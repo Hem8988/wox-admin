@@ -56,15 +56,14 @@
 								  <th>First Name</th>								  
 								  <th>Last Name</th>
 								  <th>Email ID</th>
-								  <th>Phone No</th>
-								  {{-- <th>Departure Dt.</th>
-								  <th>Return Dt.</th>
-								  <th>Passport No.</th> --}}
-								  <th>Residence</th>
-								  <th>Destination</th>
+								  <th>Phone No</th> 
+								  <th>Nationality</th>
+								  <th>Visa Type</th>
+								  <th>Message</th>
 								  <th>Status</th>
-								  <th>Created</th>
-								  <th class="no-sort">Action</th>
+								  <th class="no-sort">Passport</th>
+								  <th class="no-sort">Date</th>
+								 <!--  <th class="no-sort">Action</th> -->
 								</tr> 
 							  </thead>
 							    <tbody class="tdata">	
@@ -78,12 +77,19 @@
 								  {{-- <td>{{ @$list->departure_date }}</td> 								    --}}
 								  {{-- <td>{{ @$list->return_date }}</td> 								    --}}
 								  {{-- <td>{{ @$list->passport_no }}</td> 								    --}}
-								  <td>{{ @$list->residence_country }}</td> 								   
-								  <td>{{ @$list->destination_country }}</td> 								   
-								  <td>{{ @$list->status }}</td> 								   
-								  <td>{{ @$list->created_at->format('Y/m/d') }}</td> 								   
-				
+								  <td>{{ @$list->nationality }}</td> 								   
+								  <td>{{ @$list->visa_type }}</td> 								   
+								  <td>{{ @$list->message }}</td> 								   
+								  <td>{{ !empty($list->status) && $list->status == 1 ? 'Approved':'Requested' }}</td> 
 								  <td>
+									@if(!empty($list->passport))
+									<img src="https://www.woxtt.com/public/uploads/{{$list->passport}}" height='100px' width="100px">
+									@endif
+								</td> 
+
+								  <td>{{ !empty($list->created_at) ? date('m-d-Y',strtotime($list->created_at)) :'' }}</td> 								   
+				
+								 <!--  <td>
 									<div class="nav-item dropdown action_dropdown">
 										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 										<div class="dropdown-menu">
@@ -91,7 +97,7 @@
 											
 										</div>
 									</div>
-								  </td>
+								  </td> -->
 								</tr>	
 							  @endforeach	
 								
