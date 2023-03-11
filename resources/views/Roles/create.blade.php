@@ -7,6 +7,17 @@
     .row_permission label input {
         margin-right: 10px;
     }
+
+    .roles_nav_pills .nav-link {
+        background-color: #0080ec;
+        color: #fff;
+        margin-right: 5px;
+    }
+
+    .roles_nav_pills .nav-link:hover {
+        color: #fff !important;
+        background-color: #89ad3e;
+    }
 </style>
 
 <!-- orignaol form -->
