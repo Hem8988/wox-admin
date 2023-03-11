@@ -17,20 +17,20 @@ Route::post('/get_product_views', 'HomeController@getProductViews');
 Route::post('/get_product_other_info', 'HomeController@getProductOtherInformation');
 Route::post('/delete_action', 'HomeController@deleteAction')->middleware('auth');
  */
-  Route::get('/clear-cache', function() {
-        //$run = Artisan::call('config:clear');
-        $run = Artisan::call('cache:clear');
-        //$run = Artisan::call('config:cache');
-        return 'FINISHED';  
-    });
-Route::get('site/shutdown', function(){
-    return Artisan::call('down');
+Route::get('/clear-cache', function () {
+	//$run = Artisan::call('config:clear');
+	$run = Artisan::call('cache:clear');
+	//$run = Artisan::call('config:cache');
+	return 'FINISHED';
+});
+Route::get('site/shutdown', function () {
+	return Artisan::call('down');
 });
 
-Route::get('site/live', function(){
-    return Artisan::call('up');
+Route::get('site/live', function () {
+	return Artisan::call('up');
 });
- 
+
 // Route::get('/login','Auth/LoginController@showLoginForm');
 // Route::post('/login','Auth/LoginController@login');
 // Route::post('/ajax/login','Auth\LoginController@customerLogin');
@@ -42,7 +42,7 @@ Route::get('site/live', function(){
 // Route::post('/exception', 'ExceptionController@index')->name('exception');
 // Route::get('destinationtour', 'DestinationController@destinationList');
 
-/*********************Front Panel Start ***********************/ 
+/*********************Front Panel Start ***********************/
 //Coming Soon
 // Route::get('/manage-booking', 'HomeController@managebooking')->name('managebooking');	
 // Route::get('/coming_soon', 'HomeController@coming_soon')->name('coming_soon');	
@@ -93,7 +93,7 @@ Route::get('site/live', function(){
 // Route::get('/hotel-cities', 'HotelsearchController@hotelCities');	  
 // Route::get('/Hotel/HotelListing', 'HotelController@hotelListsing')->name('hotel-booking.HotelListing');		  
 // Route::get('/hotel-booking', 'HotelbookingController@index')->name('hotel-booking.index');	   
-	   
+
 // Route::get('/Hotel/Booking', 'HotelbookingController@index')->name('hotel-booking.HotelBooking');	   
 // Route::post('/Hotel/Payment', 'HotelbookingController@HotelPayment')->name('hotel-booking.HotelPayment');	   
 // Route::post('/Hotel/hotelpaywithrazorpay', 'HotelbookingController@HotelPay')->name('hotel-booking.HotelPay');	
@@ -108,7 +108,7 @@ Route::get('site/live', function(){
 // Route::get('/do-not-close', 'PaymentController@donotClose')->name('donotcloe');
 
 // Route::post('/package-razor-payment', 'PackageController@payWithRazorpay')->name('userpackagepaywithrazorpay');
-  
+
 //Home Page 
 // Route::get('/', 'HomeController@index')->name('home');
 // Route::get('search','FlightsController@flightList')->name('search');
@@ -194,7 +194,7 @@ Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');	 */
 //All Products linked to Individual Professor	
 // Route::get('/products/{id}', 'ProductController@index')->name('products.index');
 // Route::get('/view_product/{id}', 'ProductController@viewProduct')->name('products.view_product');
- 
+
 //Review Panel
 // Route::post('/add_review', 'DashboardController@addReview')->name('dashboard.add_review');
 
@@ -202,7 +202,7 @@ Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');	 */
 // Route::get('/cart', 'CartController@index')->name('cart.index');
 // Route::post('/cart', 'CartController@index')->name('cart.index');
 // Route::post('/update_cart', 'CartController@updateCart')->name('cart.update_cart');
-		
+
 //Shipping Info 			
 // Route::get('/address', 'DashboardController@address')->name('dashboard.address');
 // Route::post('/address', 'DashboardController@address')->name('dashboard.address');
@@ -211,7 +211,7 @@ Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');	 */
 // Route::get('/payment', 'PaymentController@index')->name('payment.index');
 // Route::post('/checkout', 'PaymentController@checkout')->name('payment.checkout');
 // Route::get('/payment_status', 'PaymentController@status')->name('payment.status');
-	
+
 //Thankyou Page
 // Route::get('/thankyou', 'PaymentController@thankyou')->name('payment.thankyou');
 
@@ -249,428 +249,441 @@ Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');	 */
 /*---------------Agent Route-------------------*/
 /*********************Admin Panel Start ***********************/
 // Route::prefix('admin')->group(function() {
-    //Login and Logout 
-		Route::get('/', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-		Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-		Route::post('login', 'Auth\AdminLoginController@login')->name('admin.login');
-		Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-	
-	//General  
-		Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
-		Route::get('/get_customer_detail', 'Admin\AdminController@CustomerDetail')->name('admin.get_customer_detail');
-		Route::get('/my_profile', 'Admin\AdminController@myProfile')->name('admin.my_profile');
-		Route::post('/my_profile', 'Admin\AdminController@myProfile')->name('admin.my_profile');
-		Route::get('/change_password', 'Admin\AdminController@change_password')->name('admin.change_password');
-		Route::post('/change_password', 'Admin\AdminController@change_password')->name('admin.change_password');
-		Route::get('/multi_factor', 'Admin\AdminController@multi_factor')->name('admin.multi_factor');
-		Route::post('/multi_factor', 'Admin\AdminController@multi_factor')->name('admin.multi_factor');
-		Route::get('/sessions', 'Admin\AdminController@sessions')->name('admin.sessions');
-		Route::post('/sessions', 'Admin\AdminController@sessions')->name('admin.sessions'); 
-		Route::post('/delete_action', 'Admin\AdminController@deleteAction'); 
-		Route::post('/delete_package_action', 'Admin\AdminController@deletePackageAction');
-		Route::post('/delete_all_action', 'Admin\AdminController@deleteAllAction');
-		Route::post('/delete_dest_action', 'Admin\AdminController@deleteDesAction');
-		Route::post('/delete_hotel_action', 'Admin\AdminController@deleteHotelAction');
-		Route::post('/delete_inclusion_action', 'Admin\AdminController@deleteinclusionAction');
-		Route::post('/delete_exclusions_action', 'Admin\AdminController@deleteexclusionsAction');
-		Route::post('/delete_top_action', 'Admin\AdminController@deleteTopAction');
-		Route::post('/delete_type_action', 'Admin\AdminController@deleteTypeAction');
-		Route::post('/update_action', 'Admin\AdminController@updateAction');
-		Route::post('/update_type_action', 'Admin\AdminController@updateTypeAction');
-		Route::post('/add_ckeditior_image', 'Admin\AdminController@addCkeditiorImage')->name('add_ckeditior_image');
-		Route::post('/get_chapters', 'Admin\AdminController@getChapters')->name('admin.get_chapters');
-		Route::get('/website_setting', 'Admin\AdminController@websiteSetting')->name('admin.website_setting');
+//Login and Logout 
+Route::get('/', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('login', 'Auth\AdminLoginController@login')->name('admin.login');
+Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
-		Route::get('/site_information', 'Admin\SiteInformationController@index')->name('admin.site_information.index');
-		Route::get('/site_information/create', 'Admin\SiteInformationController@create')->name('admin.site_information.create');
-		Route::get('/site_information/edit/{id}', 'Admin\SiteInformationController@edit')->name('admin.editSiteInformation');
-		Route::post('/site_information/edit', 'Admin\SiteInformationController@update')->name('admin.site_information.update');
-		
-		Route::get('/home_page_content', 'Admin\HomePageController@index')->name('admin.home_page.index');
-		Route::get('/home_page_content/create', 'Admin\HomePageController@create')->name('admin.home_page.create');
-		Route::get('/home_page_content/edit/{id}', 'Admin\HomePageController@edit')->name('admin.home_page.edit');
-		Route::post('/home_page_content/edit', 'Admin\HomePageController@update')->name('admin.home_page.update');
-		Route::post('/home_page_content/store', 'Admin\HomePageController@store')->name('admin.home_page.store');
-		Route::get('/home_page_content/delete/{id}', 'Admin\HomePageController@destroy')->name('admin.home_page.delete');
+//General  
+Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
+Route::get('/get_customer_detail', 'Admin\AdminController@CustomerDetail')->name('admin.get_customer_detail');
+Route::get('/my_profile', 'Admin\AdminController@myProfile')->name('admin.my_profile');
+Route::post('/my_profile', 'Admin\AdminController@myProfile')->name('admin.my_profile');
+Route::get('/change_password', 'Admin\AdminController@change_password')->name('admin.change_password');
+Route::post('/change_password', 'Admin\AdminController@change_password')->name('admin.change_password');
+Route::get('/multi_factor', 'Admin\AdminController@multi_factor')->name('admin.multi_factor');
+Route::post('/multi_factor', 'Admin\AdminController@multi_factor')->name('admin.multi_factor');
+Route::get('/sessions', 'Admin\AdminController@sessions')->name('admin.sessions');
+Route::post('/sessions', 'Admin\AdminController@sessions')->name('admin.sessions');
+Route::post('/delete_action', 'Admin\AdminController@deleteAction');
+Route::post('/delete_package_action', 'Admin\AdminController@deletePackageAction');
+Route::post('/delete_all_action', 'Admin\AdminController@deleteAllAction');
+Route::post('/delete_dest_action', 'Admin\AdminController@deleteDesAction');
+Route::post('/delete_hotel_action', 'Admin\AdminController@deleteHotelAction');
+Route::post('/delete_inclusion_action', 'Admin\AdminController@deleteinclusionAction');
+Route::post('/delete_exclusions_action', 'Admin\AdminController@deleteexclusionsAction');
+Route::post('/delete_top_action', 'Admin\AdminController@deleteTopAction');
+Route::post('/delete_type_action', 'Admin\AdminController@deleteTypeAction');
+Route::post('/update_action', 'Admin\AdminController@updateAction');
+Route::post('/update_type_action', 'Admin\AdminController@updateTypeAction');
+Route::post('/add_ckeditior_image', 'Admin\AdminController@addCkeditiorImage')->name('add_ckeditior_image');
+Route::post('/get_chapters', 'Admin\AdminController@getChapters')->name('admin.get_chapters');
+Route::get('/website_setting', 'Admin\AdminController@websiteSetting')->name('admin.website_setting');
 
-		Route::get('/banner', 'Admin\BannerController@index')->name('admin.banner.index');
-		Route::get('/banner/create', 'Admin\BannerController@create')->name('admin.banner.create');
-		Route::get('/banner/edit/{id}', 'Admin\BannerController@edit')->name('admin.banner.edit');
-		Route::post('/banner/update', 'Admin\BannerController@update')->name('admin.banner.update');
-		Route::post('/banner/store', 'Admin\BannerController@store')->name('admin.banner.store');
-		Route::get('/banner/delete/{id}', 'Admin\BannerController@destroy')->name('admin.banner.delete');
+Route::get('/site_information', 'Admin\SiteInformationController@index')->name('admin.site_information.index');
+Route::get('/site_information/create', 'Admin\SiteInformationController@create')->name('admin.site_information.create');
+Route::get('/site_information/edit/{id}', 'Admin\SiteInformationController@edit')->name('admin.editSiteInformation');
+Route::post('/site_information/edit', 'Admin\SiteInformationController@update')->name('admin.site_information.update');
 
-		
-		Route::get('/cheap_flight', 'Admin\CheapFlightController@index')->name('admin.cheap_flight.index');
-		Route::get('/cheap_flight/create', 'Admin\CheapFlightController@create')->name('admin.cheap_flight.create');
-		Route::get('/cheap_flight/edit/{id}', 'Admin\CheapFlightController@edit')->name('admin.cheap_flight.edit');
-		Route::post('/cheap_flight/update', 'Admin\CheapFlightController@update')->name('admin.cheap_flight.update');
-		Route::post('/cheap_flight/store', 'Admin\CheapFlightController@store')->name('admin.cheap_flight.store');
-		Route::get('/cheap_flight/delete/{id}', 'Admin\CheapFlightController@destroy')->name('admin.cheap_flight.delete');
+Route::get('/home_page_content', 'Admin\HomePageController@index')->name('admin.home_page.index');
+Route::get('/home_page_content/create', 'Admin\HomePageController@create')->name('admin.home_page.create');
+Route::get('/home_page_content/edit/{id}', 'Admin\HomePageController@edit')->name('admin.home_page.edit');
+Route::post('/home_page_content/edit', 'Admin\HomePageController@update')->name('admin.home_page.update');
+Route::post('/home_page_content/store', 'Admin\HomePageController@store')->name('admin.home_page.store');
+Route::get('/home_page_content/delete/{id}', 'Admin\HomePageController@destroy')->name('admin.home_page.delete');
+
+Route::get('/banner', 'Admin\BannerController@index')->name('admin.banner.index');
+Route::get('/banner/create', 'Admin\BannerController@create')->name('admin.banner.create');
+Route::get('/banner/edit/{id}', 'Admin\BannerController@edit')->name('admin.banner.edit');
+Route::post('/banner/update', 'Admin\BannerController@update')->name('admin.banner.update');
+Route::post('/banner/store', 'Admin\BannerController@store')->name('admin.banner.store');
+Route::get('/banner/delete/{id}', 'Admin\BannerController@destroy')->name('admin.banner.delete');
 
 
+Route::get('/cheap_flight', 'Admin\CheapFlightController@index')->name('admin.cheap_flight.index');
+Route::get('/cheap_flight/create', 'Admin\CheapFlightController@create')->name('admin.cheap_flight.create');
+Route::get('/cheap_flight/edit/{id}', 'Admin\CheapFlightController@edit')->name('admin.cheap_flight.edit');
+Route::post('/cheap_flight/update', 'Admin\CheapFlightController@update')->name('admin.cheap_flight.update');
+Route::post('/cheap_flight/store', 'Admin\CheapFlightController@store')->name('admin.cheap_flight.store');
+Route::get('/cheap_flight/delete/{id}', 'Admin\CheapFlightController@destroy')->name('admin.cheap_flight.delete');
 
 
+Route::post('/website_setting', 'Admin\AdminController@websiteSetting')->name('admin.website_setting');
+Route::get('/site_information', 'Admin\SiteInformationController@index')->name('admin.site_information.index');
+Route::get('/site_information/create', 'Admin\SiteInformationController@create')->name('admin.site_information.create');
+Route::get('/site_information/edit/{id}', 'Admin\SiteInformationController@edit')->name('admin.editSiteInformation');
+Route::post('/site_information/edit', 'Admin\SiteInformationController@update')->name('admin.site_information.update');
 
-		Route::post('/website_setting', 'Admin\AdminController@websiteSetting')->name('admin.website_setting');
+Route::post('/get_states', 'Admin\AdminController@getStates');
+Route::get('/settings/taxes/returnsetting', 'Admin\AdminController@returnsetting')->name('admin.returnsetting');
+Route::get('/settings/taxes/taxrates', 'Admin\AdminController@taxrates')->name('admin.taxrates');
+Route::get('/settings/taxes/taxrates/create', 'Admin\AdminController@taxratescreate')->name('admin.taxrates.create');
+Route::post('/settings/taxes/taxrates/store', 'Admin\AdminController@savetaxrate')->name('admin.taxrates.store');
+Route::get('/settings/taxes/taxrates/edit/{id}', 'Admin\AdminController@edittaxrates')->name('admin.edittaxrates');
+Route::post('/settings/taxes/taxrates/edit', 'Admin\AdminController@edittaxrates')->name('admin.edittaxrates');
+Route::post('/settings/taxes/savereturnsetting', 'Admin\AdminController@returnsetting')->name('admin.savereturnsetting');
 
-		Route::get('/site_information', 'Admin\SiteInformationController@index')->name('admin.site_information.index');
-		Route::get('/site_information/create', 'Admin\SiteInformationController@create')->name('admin.site_information.create');
-		Route::get('/site_information/edit/{id}', 'Admin\SiteInformationController@edit')->name('admin.editSiteInformation');
-		Route::post('/site_information/edit', 'Admin\SiteInformationController@update')->name('admin.site_information.update');
-		
-		
-		Route::post('/get_states', 'Admin\AdminController@getStates');
-		Route::get('/settings/taxes/returnsetting', 'Admin\AdminController@returnsetting')->name('admin.returnsetting');
-		Route::get('/settings/taxes/taxrates', 'Admin\AdminController@taxrates')->name('admin.taxrates');
-		Route::get('/settings/taxes/taxrates/create', 'Admin\AdminController@taxratescreate')->name('admin.taxrates.create');
-		Route::post('/settings/taxes/taxrates/store', 'Admin\AdminController@savetaxrate')->name('admin.taxrates.store');
-		Route::get('/settings/taxes/taxrates/edit/{id}', 'Admin\AdminController@edittaxrates')->name('admin.edittaxrates');
-		Route::post('/settings/taxes/taxrates/edit', 'Admin\AdminController@edittaxrates')->name('admin.edittaxrates');
-		Route::post('/settings/taxes/savereturnsetting', 'Admin\AdminController@returnsetting')->name('admin.savereturnsetting');
-		
-		Route::get('/settings/currencies', 'Admin\CurrencyController@index')->name('admin.currency.index');
-		Route::get('/settings/currencies/edit/{id}', 'Admin\CurrencyController@edit')->name('admin.currency.edit');
-		Route::post('/settings/currencies/edit', 'Admin\CurrencyController@edit')->name('admin.currency.edit');
-		Route::get('/settings/currencies/create', 'Admin\CurrencyController@create')->name('admin.currency.create');
-		Route::post('/settings/currencies/store', 'Admin\CurrencyController@store')->name('admin.currency.store');
-		
-	/*CRM route start*/
-		Route::post('/uploadfile/store', 'Admin\MediaController@store')->name('admin.media.store');
-		Route::get('/uploadfile/index', 'Admin\MediaController@index')->name('admin.media.index');
-		Route::get('/uploadfile/delete', 'Admin\MediaController@deleteAction')->name('admin.media.delete');
-		
-		Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
-		Route::get('/users/create', 'Admin\UserController@create')->name('admin.users.create'); 
-		Route::post('/users/store', 'Admin\UserController@store')->name('admin.users.store');
-		Route::get('/users/edit/{id}', 'Admin\UserController@edit')->name('admin.users.edit');
-		Route::post('/users/edit', 'Admin\UserController@edit')->name('admin.users.edit');
-		Route::get('/users/send-password/{id}', 'Admin\UserController@sendPassword')->name('admin.users.sendpassword');
-		Route::get('/users/view/{id}', 'Admin\UserController@show')->name('admin.users.view');
-		
-		Route::get('/agents', 'Admin\AgentController@index')->name('admin.agents.index');
-		Route::get('/agents/view/{id}', 'Admin\AgentController@show')->name('admin.agents.view');
-		Route::get('/agents/setlimit/{id}', 'Admin\AgentController@setCreditlimit')->name('admin.agents.setlimit');
-		Route::post('/agents/setlimit/', 'Admin\AgentController@setCreditlimit')->name('admin.agents.setlimit');
-		Route::get('/agents/send-password/{id}', 'Admin\AgentController@sendPassword')->name('admin.agents.sendpassword');  
-		
-		Route::get('/agents/transactionlog/{id}', 'Admin\TransactionlogController@index')->name('admin.agents.transactionlog.index');   
-		Route::get('/agents/credit_limit_log/{id}', 'Admin\TransactionlogController@credit_limit_log')->name('admin.agents.limitlog');     
-		Route::get('/agents/agentlogin/{id}', 'Admin\AgentController@agentlogin')->name('admin.agents.agentlogin');
-		Route::get('/excel_agents_log', 'Admin\AgentController@excelReport')->name('admin.excel_agents_log');     
-		 
-		Route::get('/staff', 'Admin\StaffController@index')->name('admin.staff.index');
-		Route::get('/staff/create', 'Admin\StaffController@create')->name('admin.staff.create'); 
-		Route::post('/staff/store', 'Admin\StaffController@store')->name('admin.staff.store');
-		Route::get('/staff/edit/{id}', 'Admin\StaffController@edit')->name('admin.staff.edit');
-		Route::post('/staff/edit', 'Admin\StaffController@edit')->name('admin.staff.edit');
-		
-		Route::get('/users/clientlist', 'Admin\UserController@clientlist')->name('admin.users.clientlist'); 		
-		Route::get('/users/createclient', 'Admin\UserController@createclient')->name('admin.users.createclient'); 
-		Route::post('/users/storeclient', 'Admin\UserController@storeclient')->name('admin.users.storeclient'); 
-		Route::get('/users/editclient/{id}', 'Admin\UserController@editclient')->name('admin.users.editclient');
-		Route::post('/users/editclient', 'Admin\UserController@editclient')->name('admin.users.editclient'); 
-		Route::get('/excel_users_log', 'Admin\UserController@excelReport')->name('admin.excel_users_log'); 
-		Route::post('/followup/store', 'Admin\FollowupController@store')->name('admin.followup.store'); 
-		Route::get('/followup/list', 'Admin\FollowupController@index')->name('admin.followup.index'); 
-		 
-		Route::get('/usertype', 'Admin\UsertypeController@index')->name('admin.usertype.index');
-		Route::get('/usertype/create', 'Admin\UsertypeController@create')->name('admin.usertype.create');  		
-		Route::post('/usertype/store', 'Admin\UsertypeController@store')->name('admin.usertype.store');
-		Route::get('/usertype/edit/{id}', 'Admin\UsertypeController@edit')->name('admin.usertype.edit');
-		Route::post('/usertype/edit', 'Admin\UsertypeController@edit')->name('admin.usertype.edit');
-		
-		Route::get('/userrole', 'Admin\UserroleController@index')->name('admin.userrole.index');
-		Route::get('/userrole/create', 'Admin\UserroleController@create')->name('admin.userrole.create');  
-		Route::post('/userrole/store', 'Admin\UserroleController@store')->name('admin.userrole.store');
-		Route::get('/userrole/edit/{id}', 'Admin\UserroleController@edit')->name('admin.userrole.edit');
-		Route::post('/userrole/edit', 'Admin\UserroleController@edit')->name('admin.userrole.edit');
-		
-	//Manage Destination Start
-		Route::get('/destination', 'Admin\ManagedestinationController@index')->name('admin.managedestination.index');
-		Route::get('/destination/create', 'Admin\ManagedestinationController@create')->name('admin.managedestination.create'); 
-		Route::post('/destination/store', 'Admin\ManagedestinationController@store')->name('admin.managedestination.store');
-		Route::get('/destination/edit/{id}', 'Admin\ManagedestinationController@edit')->name('admin.managedestination.edit');
-		Route::post('/destination/edit', 'Admin\ManagedestinationController@edit')->name('admin.managedestination.edit'); 
-		 
-		//Manage locations Start
-		Route::get('/locations', 'Admin\LocationController@index')->name('admin.locations.index');
-		Route::get('/locations/create', 'Admin\LocationController@create')->name('admin.locations.create'); 
-		Route::post('/locations/store', 'Admin\LocationController@store')->name('admin.locations.store');
-		Route::get('/locations/edit/{id}', 'Admin\LocationController@edit')->name('admin.locations.edit');
-		Route::post('/locations/edit', 'Admin\LocationController@edit')->name('admin.locations.edit');  
-		//Manage themes Start
-		Route::get('/themes', 'Admin\ThemeController@index')->name('admin.themes.index');
-		Route::get('/themes/create', 'Admin\ThemeController@create')->name('admin.themes.create'); 
-		Route::post('/themes/store', 'Admin\ThemeController@store')->name('admin.themes.store');
-		Route::get('/themes/edit/{id}', 'Admin\ThemeController@edit')->name('admin.themes.edit');
-		Route::post('/themes/edit', 'Admin\ThemeController@edit')->name('admin.themes.edit');  
-	 
-	//Manage Hotel Start
-		Route::get('/hotel', 'Admin\ManagehotelController@index')->name('admin.managehotel.index');
-		Route::get('/hotel/create', 'Admin\ManagehotelController@create')->name('admin.managehotel.create');
-		Route::post('/hotel/store', 'Admin\ManagehotelController@store')->name('admin.managehotel.store');
-		Route::get('/hotel/edit/{id}', 'Admin\ManagehotelController@edit')->name('admin.managehotel.edit');
-		Route::post('/hotel/edit', 'Admin\ManagehotelController@edit')->name('admin.managehotel.edit');	
+Route::get('/settings/currencies', 'Admin\CurrencyController@index')->name('admin.currency.index');
+Route::get('/settings/currencies/edit/{id}', 'Admin\CurrencyController@edit')->name('admin.currency.edit');
+Route::post('/settings/currencies/edit', 'Admin\CurrencyController@edit')->name('admin.currency.edit');
+Route::get('/settings/currencies/create', 'Admin\CurrencyController@create')->name('admin.currency.create');
+Route::post('/settings/currencies/store', 'Admin\CurrencyController@store')->name('admin.currency.store');
 
-	//Manage Inclusion Start
-		Route::get('/inclusion', 'Admin\ManageinclusionController@index')->name('admin.manageinclusion.index');
-		Route::get('/inclusion/create', 'Admin\ManageinclusionController@create')->name('admin.manageinclusion.create'); 
-		Route::post('/inclusion/store', 'Admin\ManageinclusionController@store')->name('admin.manageinclusion.store');
-		Route::get('/inclusion/edit/{id}', 'Admin\ManageinclusionController@edit')->name('admin.manageinclusion.edit');
-		Route::post('/inclusion/edit', 'Admin\ManageinclusionController@edit')->name('admin.manageinclusion.edit');
-		Route::post('/add_inclusion', 'Admin\AdminController@add_inclusion')->name('admin.add_inclusion');
+/*CRM route start*/
+Route::post('/uploadfile/store', 'Admin\MediaController@store')->name('admin.media.store');
+Route::get('/uploadfile/index', 'Admin\MediaController@index')->name('admin.media.index');
+Route::get('/uploadfile/delete', 'Admin\MediaController@deleteAction')->name('admin.media.delete');
 
-	//Manage Exclusion Start
-		Route::get('/exclusion', 'Admin\ManageexclusionController@index')->name('admin.manageexclusion.index');
-		Route::get('/exclusion/create', 'Admin\ManageexclusionController@create')->name('admin.manageexclusion.create');
-		Route::post('/exclusion/store', 'Admin\ManageexclusionController@store')->name('admin.manageexclusion.store');
-		Route::get('/exclusion/edit/{id}', 'Admin\ManageexclusionController@edit')->name('admin.manageexclusion.edit');
-		Route::post('/exclusion/edit', 'Admin\ManageexclusionController@edit')->name('admin.manageexclusion.edit');	
-  
-	//Manage Amenities Start 
-		Route::get('/amenities', 'Admin\ManageamenitiesController@index')->name('admin.manageamenities.index');
-		Route::get('/amenities/create', 'Admin\ManageamenitiesController@create')->name('admin.manageamenities.create');
-		Route::post('/amenities/store', 'Admin\ManageamenitiesController@store')->name('admin.manageamenities.store');
-		Route::get('/amenities/edit/{id}', 'Admin\ManageamenitiesController@edit')->name('admin.manageamenities.edit');
-		Route::post('/amenities/edit', 'Admin\ManageamenitiesController@edit')->name('admin.manageamenities.edit');	
-		 
-	//Manage Holiday Type Start 
-		Route::get('/holidaytype', 'Admin\ManageholidaytypeController@index')->name('admin.manageholidaytype.index');
-		Route::get('/holidaytype/create', 'Admin\ManageholidaytypeController@create')->name('admin.manageholidaytype.create');
-		Route::post('/holidaytype/store', 'Admin\ManageholidaytypeController@store')->name('admin.manageholidaytype.store');
-		Route::get('/holidaytype/edit/{id}', 'Admin\ManageholidaytypeController@edit')->name('admin.manageholidaytype.edit');
-		Route::post('/holidaytype/edit', 'Admin\ManageholidaytypeController@edit')->name('admin.manageholidaytype.edit');
+Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
+Route::get('/users/create', 'Admin\UserController@create')->name('admin.users.create');
+Route::post('/users/store', 'Admin\UserController@store')->name('admin.users.store');
+Route::get('/users/edit/{id}', 'Admin\UserController@edit')->name('admin.users.edit');
+Route::post('/users/edit', 'Admin\UserController@edit')->name('admin.users.edit');
+Route::get('/users/send-password/{id}', 'Admin\UserController@sendPassword')->name('admin.users.sendpassword');
+Route::get('/users/view/{id}', 'Admin\UserController@show')->name('admin.users.view');
 
-	//Manage Top Inclusion Start
-		Route::get('/topinclusion', 'Admin\ManagetopinclusionController@index')->name('admin.managetopinclusion.index');
-		Route::get('/topinclusion/create', 'Admin\ManagetopinclusionController@create')->name('admin.managetopinclusion.create');
-		Route::post('/topinclusion/store', 'Admin\ManagetopinclusionController@store')->name('admin.managetopinclusion.store');
-		Route::get('/topinclusion/edit/{id}', 'Admin\ManagetopinclusionController@edit')->name('admin.managetopinclusion.edit');
-		Route::post('/topinclusion/edit', 'Admin\ManagetopinclusionController@edit')->name('admin.managetopinclusion.edit');
-		
-		Route::get('/top-inclusion', 'Admin\TopinclusionController@index')->name('admin.topinclusion.index');
-		Route::get('/top-inclusion/create', 'Admin\TopinclusionController@create')->name('admin.topinclusion.create');
-		Route::post('/top-inclusion/store', 'Admin\TopinclusionController@store')->name('admin.topinclusion.store');
-		Route::get('/top-inclusion/edit/{id}', 'Admin\TopinclusionController@edit')->name('admin.topinclusion.edit');
-		Route::post('/top-inclusion/edit', 'Admin\TopinclusionController@edit')->name('admin.topinclusion.edit');
-		
-		
-		//Manage Addon Start
-		Route::get('/addons', 'Admin\ManageaddonController@index')->name('admin.manageaddon.index');
-		Route::get('/addons/create', 'Admin\ManageaddonController@create')->name('admin.manageaddon.create');
-		Route::post('/addons/store', 'Admin\ManageaddonController@store')->name('admin.manageaddon.store');
-		Route::get('/addons/edit/{id}', 'Admin\ManageaddonController@edit')->name('admin.manageaddon.edit');
-		Route::post('/addons/edit', 'Admin\ManageaddonController@edit')->name('admin.manageaddon.edit');
-		
-		//Manage Top Inclusion Start
-		Route::get('/cities', 'Admin\ManagecityController@index')->name('admin.cities.index');
-		Route::get('/fetch-cities', 'Admin\ManagecityController@fetchCities')->name('fetch.data.cities');
-		Route::get('/cities/create', 'Admin\ManagecityController@create')->name('admin.cities.create');
-		Route::post('/cities/store', 'Admin\ManagecityController@store')->name('admin.cities.store');
-		Route::get('/cities/edit/{id}', 'Admin\ManagecityController@edit')->name('admin.cities.edit');
-		Route::post('/cities/edit', 'Admin\ManagecityController@edit')->name('admin.cities.edit');
-	
-	//Manage Holiday Package Start
-		Route::get('/holidaypackage', 'Admin\ManageholidaypackageController@index')->name('admin.manageholidaypackage.index');
-		Route::get('/sort-package', 'Admin\ManageholidaypackageController@sortPackage')->name('admin.manageholidaypackage.sort');
-		Route::post('/add-sort', 'Admin\ManageholidaypackageController@addSort')->name('admin.manageholidaypackage.addsort');
-		Route::get('/holidaypackage/create', 'Admin\ManageholidaypackageController@create')->name('admin.manageholidaypackage.create');	
-		Route::post('/holidaypackage/store', 'Admin\ManageholidaypackageController@store')->name('admin.manageholidaypackage.store');
-		Route::get('/holidaypackage/edit/{id}', 'Admin\ManageholidaypackageController@edit')->name('admin.manageholidaypackage.edit');
-		Route::post('/holidaypackage/edit', 'Admin\ManageholidaypackageController@edit')->name('admin.manageholidaypackage.edit'); 
-		Route::get('/holidaypackage/duplicate/{id}', 'Admin\ManageholidaypackageController@duplicate')->name('admin.manageholidaypackage.duplicate');
-		Route::post('/holidaypackage/store-duplicate', 'Admin\ManageholidaypackageController@storeDuplicate')->name('admin.manageholidaypackage.storeduplicate');
-		
-		Route::get('/getDestinations', 'Admin\ManageholidaypackageController@getDestinations')->name('getDestinations');	  
-		Route::get('/getPackages', 'Admin\ManageholidaypackageController@getPackages')->name('getPackages');	  
-		Route::get('/getHotels', 'Admin\ManageholidaypackageController@getHotels')->name('getHotels');	   
-		 
-	//Manage Gallery Start
-		Route::get('/gallery', 'Admin\GalleryController@index')->name('admin.managegallery.index'); 
-		Route::get('/gallery/create', 'Admin\GalleryController@create')->name('admin.managegallery.create');
-		Route::post('/gallery/store', 'Admin\GalleryController@store')->name('admin.managegallery.store');
-		Route::get('/gallery/edit/{id}', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');
-		Route::post('/gallery/edit', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');		
-	  
-	     
-	  //Manage Contacts Start   
-		Route::get('/contact', 'Admin\ContactController@index')->name('admin.managecontact.index'); 
-		Route::get('/contact/create', 'Admin\ContactController@create')->name('admin.managecontact.create');
-		Route::post('/contact/store', 'Admin\ContactController@store')->name('admin.managecontact.store');
-		Route::post('/contact/add', 'Admin\ContactController@add')->name('admin.managecontact.add');
-		Route::get('/contact/edit/{id}', 'Admin\ContactController@edit')->name('admin.managecontact.edit');
-		Route::post('/contact/edit', 'Admin\ContactController@edit')->name('admin.managecontact.edit');
-		Route::post('/contact/storeaddress', 'Admin\ContactController@storeaddress')->name('admin.managecontact.edit');
-		 
-		//Leads Start    
-		Route::get('/leads', 'Admin\LeadController@index')->name('admin.leads.index');  
-		Route::get('/leads/history/{id}', 'Admin\LeadController@history')->name('admin.leads.history'); 
-		Route::get('/leads/create', 'Admin\LeadController@create')->name('admin.leads.create');   
-		Route::post('/leads/assign', 'Admin\LeadController@assign')->name('admin.leads.assign');    
-		Route::get('/leads/edit/{id}', 'Admin\LeadController@edit')->name('admin.leads.edit');
-		
-		//Refer A Friend Start   
-		Route::get('/referfriend', 'Admin\ReferfriendController@index')->name('admin.referfriend.index');  
-		Route::get('/referfriend/create', 'Admin\ReferfriendController@create')->name('admin.referfriend.create');    
-		Route::post('/leads/store', 'Admin\LeadController@store')->name('admin.leads.store');
-		/*Route::get('/gallery/edit/{id}', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');
+Route::get('/agents', 'Admin\AgentController@index')->name('admin.agents.index');
+Route::get('/agents/view/{id}', 'Admin\AgentController@show')->name('admin.agents.view');
+Route::get('/agents/setlimit/{id}', 'Admin\AgentController@setCreditlimit')->name('admin.agents.setlimit');
+Route::post('/agents/setlimit/', 'Admin\AgentController@setCreditlimit')->name('admin.agents.setlimit');
+Route::get('/agents/send-password/{id}', 'Admin\AgentController@sendPassword')->name('admin.agents.sendpassword');
+
+Route::get('/agents/transactionlog/{id}', 'Admin\TransactionlogController@index')->name('admin.agents.transactionlog.index');
+Route::get('/agents/credit_limit_log/{id}', 'Admin\TransactionlogController@credit_limit_log')->name('admin.agents.limitlog');
+Route::get('/agents/agentlogin/{id}', 'Admin\AgentController@agentlogin')->name('admin.agents.agentlogin');
+Route::get('/excel_agents_log', 'Admin\AgentController@excelReport')->name('admin.excel_agents_log');
+
+Route::get('/staff', 'Admin\StaffController@index')->name('admin.staff.index');
+Route::get('/staff/create', 'Admin\StaffController@create')->name('admin.staff.create');
+Route::post('/staff/store', 'Admin\StaffController@store')->name('admin.staff.store');
+Route::get('/staff/edit/{id}', 'Admin\StaffController@edit')->name('admin.staff.edit');
+Route::post('/staff/edit', 'Admin\StaffController@edit')->name('admin.staff.edit');
+
+Route::get('/users/clientlist', 'Admin\UserController@clientlist')->name('admin.users.clientlist');
+Route::get('/users/createclient', 'Admin\UserController@createclient')->name('admin.users.createclient');
+Route::post('/users/storeclient', 'Admin\UserController@storeclient')->name('admin.users.storeclient');
+Route::get('/users/editclient/{id}', 'Admin\UserController@editclient')->name('admin.users.editclient');
+Route::post('/users/editclient', 'Admin\UserController@editclient')->name('admin.users.editclient');
+Route::get('/excel_users_log', 'Admin\UserController@excelReport')->name('admin.excel_users_log');
+Route::post('/followup/store', 'Admin\FollowupController@store')->name('admin.followup.store');
+Route::get('/followup/list', 'Admin\FollowupController@index')->name('admin.followup.index');
+
+Route::get('/usertype', 'Admin\UsertypeController@index')->name('admin.usertype.index');
+Route::get('/usertype/create', 'Admin\UsertypeController@create')->name('admin.usertype.create');
+Route::post('/usertype/store', 'Admin\UsertypeController@store')->name('admin.usertype.store');
+Route::get('/usertype/edit/{id}', 'Admin\UsertypeController@edit')->name('admin.usertype.edit');
+Route::post('/usertype/edit', 'Admin\UsertypeController@edit')->name('admin.usertype.edit');
+
+Route::get('/userrole', 'Admin\UserroleController@index')->name('admin.userrole.index');
+Route::get('/userrole/create', 'Admin\UserroleController@create')->name('admin.userrole.create');
+Route::post('/userrole/store', 'Admin\UserroleController@store')->name('admin.userrole.store');
+Route::get('/userrole/edit/{id}', 'Admin\UserroleController@edit')->name('admin.userrole.edit');
+Route::post('/userrole/edit', 'Admin\UserroleController@edit')->name('admin.userrole.edit');
+
+//Manage Destination Start
+Route::get('/destination', 'Admin\ManagedestinationController@index')->name('admin.managedestination.index');
+Route::get('/destination/create', 'Admin\ManagedestinationController@create')->name('admin.managedestination.create');
+Route::post('/destination/store', 'Admin\ManagedestinationController@store')->name('admin.managedestination.store');
+Route::get('/destination/edit/{id}', 'Admin\ManagedestinationController@edit')->name('admin.managedestination.edit');
+Route::post('/destination/edit', 'Admin\ManagedestinationController@edit')->name('admin.managedestination.edit');
+
+//Manage locations Start
+Route::get('/locations', 'Admin\LocationController@index')->name('admin.locations.index');
+Route::get('/locations/create', 'Admin\LocationController@create')->name('admin.locations.create');
+Route::post('/locations/store', 'Admin\LocationController@store')->name('admin.locations.store');
+Route::get('/locations/edit/{id}', 'Admin\LocationController@edit')->name('admin.locations.edit');
+Route::post('/locations/edit', 'Admin\LocationController@edit')->name('admin.locations.edit');
+//Manage themes Start
+Route::get('/themes', 'Admin\ThemeController@index')->name('admin.themes.index');
+Route::get('/themes/create', 'Admin\ThemeController@create')->name('admin.themes.create');
+Route::post('/themes/store', 'Admin\ThemeController@store')->name('admin.themes.store');
+Route::get('/themes/edit/{id}', 'Admin\ThemeController@edit')->name('admin.themes.edit');
+Route::post('/themes/edit', 'Admin\ThemeController@edit')->name('admin.themes.edit');
+
+//Manage Hotel Start
+Route::get('/hotel', 'Admin\ManagehotelController@index')->name('admin.managehotel.index');
+Route::get('/hotel/create', 'Admin\ManagehotelController@create')->name('admin.managehotel.create');
+Route::post('/hotel/store', 'Admin\ManagehotelController@store')->name('admin.managehotel.store');
+Route::get('/hotel/edit/{id}', 'Admin\ManagehotelController@edit')->name('admin.managehotel.edit');
+Route::post('/hotel/edit', 'Admin\ManagehotelController@edit')->name('admin.managehotel.edit');
+
+//Manage Inclusion Start
+Route::get('/inclusion', 'Admin\ManageinclusionController@index')->name('admin.manageinclusion.index');
+Route::get('/inclusion/create', 'Admin\ManageinclusionController@create')->name('admin.manageinclusion.create');
+Route::post('/inclusion/store', 'Admin\ManageinclusionController@store')->name('admin.manageinclusion.store');
+Route::get('/inclusion/edit/{id}', 'Admin\ManageinclusionController@edit')->name('admin.manageinclusion.edit');
+Route::post('/inclusion/edit', 'Admin\ManageinclusionController@edit')->name('admin.manageinclusion.edit');
+Route::post('/add_inclusion', 'Admin\AdminController@add_inclusion')->name('admin.add_inclusion');
+
+//Manage Exclusion Start
+Route::get('/exclusion', 'Admin\ManageexclusionController@index')->name('admin.manageexclusion.index');
+Route::get('/exclusion/create', 'Admin\ManageexclusionController@create')->name('admin.manageexclusion.create');
+Route::post('/exclusion/store', 'Admin\ManageexclusionController@store')->name('admin.manageexclusion.store');
+Route::get('/exclusion/edit/{id}', 'Admin\ManageexclusionController@edit')->name('admin.manageexclusion.edit');
+Route::post('/exclusion/edit', 'Admin\ManageexclusionController@edit')->name('admin.manageexclusion.edit');
+
+//Manage Amenities Start 
+Route::get('/amenities', 'Admin\ManageamenitiesController@index')->name('admin.manageamenities.index');
+Route::get('/amenities/create', 'Admin\ManageamenitiesController@create')->name('admin.manageamenities.create');
+Route::post('/amenities/store', 'Admin\ManageamenitiesController@store')->name('admin.manageamenities.store');
+Route::get('/amenities/edit/{id}', 'Admin\ManageamenitiesController@edit')->name('admin.manageamenities.edit');
+Route::post('/amenities/edit', 'Admin\ManageamenitiesController@edit')->name('admin.manageamenities.edit');
+
+//Manage Holiday Type Start 
+Route::get('/holidaytype', 'Admin\ManageholidaytypeController@index')->name('admin.manageholidaytype.index');
+Route::get('/holidaytype/create', 'Admin\ManageholidaytypeController@create')->name('admin.manageholidaytype.create');
+Route::post('/holidaytype/store', 'Admin\ManageholidaytypeController@store')->name('admin.manageholidaytype.store');
+Route::get('/holidaytype/edit/{id}', 'Admin\ManageholidaytypeController@edit')->name('admin.manageholidaytype.edit');
+Route::post('/holidaytype/edit', 'Admin\ManageholidaytypeController@edit')->name('admin.manageholidaytype.edit');
+
+//Manage Top Inclusion Start
+Route::get('/topinclusion', 'Admin\ManagetopinclusionController@index')->name('admin.managetopinclusion.index');
+Route::get('/topinclusion/create', 'Admin\ManagetopinclusionController@create')->name('admin.managetopinclusion.create');
+Route::post('/topinclusion/store', 'Admin\ManagetopinclusionController@store')->name('admin.managetopinclusion.store');
+Route::get('/topinclusion/edit/{id}', 'Admin\ManagetopinclusionController@edit')->name('admin.managetopinclusion.edit');
+Route::post('/topinclusion/edit', 'Admin\ManagetopinclusionController@edit')->name('admin.managetopinclusion.edit');
+
+Route::get('/top-inclusion', 'Admin\TopinclusionController@index')->name('admin.topinclusion.index');
+Route::get('/top-inclusion/create', 'Admin\TopinclusionController@create')->name('admin.topinclusion.create');
+Route::post('/top-inclusion/store', 'Admin\TopinclusionController@store')->name('admin.topinclusion.store');
+Route::get('/top-inclusion/edit/{id}', 'Admin\TopinclusionController@edit')->name('admin.topinclusion.edit');
+Route::post('/top-inclusion/edit', 'Admin\TopinclusionController@edit')->name('admin.topinclusion.edit');
+
+
+//Manage Addon Start
+Route::get('/addons', 'Admin\ManageaddonController@index')->name('admin.manageaddon.index');
+Route::get('/addons/create', 'Admin\ManageaddonController@create')->name('admin.manageaddon.create');
+Route::post('/addons/store', 'Admin\ManageaddonController@store')->name('admin.manageaddon.store');
+Route::get('/addons/edit/{id}', 'Admin\ManageaddonController@edit')->name('admin.manageaddon.edit');
+Route::post('/addons/edit', 'Admin\ManageaddonController@edit')->name('admin.manageaddon.edit');
+
+//Manage Top Inclusion Start
+Route::get('/cities', 'Admin\ManagecityController@index')->name('admin.cities.index');
+Route::get('/fetch-cities', 'Admin\ManagecityController@fetchCities')->name('fetch.data.cities');
+Route::get('/cities/create', 'Admin\ManagecityController@create')->name('admin.cities.create');
+Route::post('/cities/store', 'Admin\ManagecityController@store')->name('admin.cities.store');
+Route::get('/cities/edit/{id}', 'Admin\ManagecityController@edit')->name('admin.cities.edit');
+Route::post('/cities/edit', 'Admin\ManagecityController@edit')->name('admin.cities.edit');
+
+//Manage Holiday Package Start
+Route::get('/holidaypackage', 'Admin\ManageholidaypackageController@index')->name('admin.manageholidaypackage.index');
+Route::get('/sort-package', 'Admin\ManageholidaypackageController@sortPackage')->name('admin.manageholidaypackage.sort');
+Route::post('/add-sort', 'Admin\ManageholidaypackageController@addSort')->name('admin.manageholidaypackage.addsort');
+Route::get('/holidaypackage/create', 'Admin\ManageholidaypackageController@create')->name('admin.manageholidaypackage.create');
+Route::post('/holidaypackage/store', 'Admin\ManageholidaypackageController@store')->name('admin.manageholidaypackage.store');
+Route::get('/holidaypackage/edit/{id}', 'Admin\ManageholidaypackageController@edit')->name('admin.manageholidaypackage.edit');
+Route::post('/holidaypackage/edit', 'Admin\ManageholidaypackageController@edit')->name('admin.manageholidaypackage.edit');
+Route::get('/holidaypackage/duplicate/{id}', 'Admin\ManageholidaypackageController@duplicate')->name('admin.manageholidaypackage.duplicate');
+Route::post('/holidaypackage/store-duplicate', 'Admin\ManageholidaypackageController@storeDuplicate')->name('admin.manageholidaypackage.storeduplicate');
+
+Route::get('/getDestinations', 'Admin\ManageholidaypackageController@getDestinations')->name('getDestinations');
+Route::get('/getPackages', 'Admin\ManageholidaypackageController@getPackages')->name('getPackages');
+Route::get('/getHotels', 'Admin\ManageholidaypackageController@getHotels')->name('getHotels');
+
+//Manage Gallery Start
+Route::get('/gallery', 'Admin\GalleryController@index')->name('admin.managegallery.index');
+Route::get('/gallery/create', 'Admin\GalleryController@create')->name('admin.managegallery.create');
+Route::post('/gallery/store', 'Admin\GalleryController@store')->name('admin.managegallery.store');
+Route::get('/gallery/edit/{id}', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');
+Route::post('/gallery/edit', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');
+
+
+//Manage Contacts Start   
+Route::get('/contact', 'Admin\ContactController@index')->name('admin.managecontact.index');
+Route::get('/contact/create', 'Admin\ContactController@create')->name('admin.managecontact.create');
+Route::post('/contact/store', 'Admin\ContactController@store')->name('admin.managecontact.store');
+Route::post('/contact/add', 'Admin\ContactController@add')->name('admin.managecontact.add');
+Route::get('/contact/edit/{id}', 'Admin\ContactController@edit')->name('admin.managecontact.edit');
+Route::post('/contact/edit', 'Admin\ContactController@edit')->name('admin.managecontact.edit');
+Route::post('/contact/storeaddress', 'Admin\ContactController@storeaddress')->name('admin.managecontact.edit');
+
+//Leads Start    
+Route::get('/leads', 'Admin\LeadController@index')->name('admin.leads.index');
+Route::get('/leads/history/{id}', 'Admin\LeadController@history')->name('admin.leads.history');
+Route::get('/leads/create', 'Admin\LeadController@create')->name('admin.leads.create');
+Route::post('/leads/assign', 'Admin\LeadController@assign')->name('admin.leads.assign');
+Route::get('/leads/edit/{id}', 'Admin\LeadController@edit')->name('admin.leads.edit');
+
+//Refer A Friend Start   
+Route::get('/referfriend', 'Admin\ReferfriendController@index')->name('admin.referfriend.index');
+Route::get('/referfriend/create', 'Admin\ReferfriendController@create')->name('admin.referfriend.create');
+Route::post('/leads/store', 'Admin\LeadController@store')->name('admin.leads.store');
+/*Route::get('/gallery/edit/{id}', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');
 		Route::post('/gallery/edit', 'Admin\GalleryController@edit')->name('admin.managegallery.edit');*/
-		    
-		//Invoices Start    
-		Route::get('/invoice', 'Admin\InvoiceController@index')->name('admin.invoice.index');  
-		Route::get('/invoice/lists/{id}', 'Admin\InvoiceController@lists')->name('admin.invoice.lists');  
-		Route::get('/invoice/edit/{id}', 'Admin\InvoiceController@edit')->name('admin.invoice.edit');  
-		Route::post('/invoice/edit', 'Admin\InvoiceController@edit')->name('admin.invoice.edit');  
-		Route::get('/invoice/create', 'Admin\InvoiceController@create')->name('admin.invoice.create');   
-		Route::post('/invoice/store', 'Admin\InvoiceController@store')->name('admin.invoice.store'); 
-		Route::get('/invoice/detail', 'Admin\InvoiceController@detail')->name('admin.invoice.detail'); 
-		Route::get('/invoice/email/{id}', 'Admin\InvoiceController@email')->name('admin.invoice.email'); 
-		Route::post('/invoice/email', 'Admin\InvoiceController@email')->name('admin.invoice.email'); 
-		Route::get('/invoice/editpayment', 'Admin\InvoiceController@editpayment')->name('admin.invoice.editpayment'); 
-		Route::get('/invoice/invoicebyid', 'Admin\InvoiceController@invoicebyid')->name('admin.invoice.invoicebyid'); 
-		Route::get('/invoice/history', 'Admin\InvoiceController@history')->name('admin.invoice.history'); 
-		Route::post('/invoice/paymentsave', 'Admin\InvoiceController@paymentsave')->name('admin.invoice.paymentsave'); 
-		Route::post('/invoice/editpaymentsave', 'Admin\InvoiceController@editpaymentsave')->name('admin.invoice.editpaymentsave'); 
-		Route::post('/invoice/addcomment', 'Admin\InvoiceController@addcomment')->name('admin.invoice.addcomment'); 
-		Route::post('/invoice/sharelink', 'Admin\InvoiceController@sharelink')->name('admin.invoice.sharelink'); 
-		Route::post('/invoice/disablelink', 'Admin\InvoiceController@disablelink')->name('admin.invoice.disablelink'); 
-		Route::get('/invoice/download/{id}', 'Admin\InvoiceController@customer_invoice_download')->name('admin.invoice.customer_invoice_download'); 
-		Route::get('/invoice/print/{id}', 'Admin\InvoiceController@customer_invoice_print')->name('admin.invoice.customer_invoice_print'); 
-		Route::get('/invoice/reminder/{id}', 'Admin\InvoiceController@reminder')->name('admin.invoice.reminder'); 
-		Route::post('/invoice/reminder', 'Admin\InvoiceController@reminder')->name('admin.invoice.reminder'); 
-		Route::post('/invoice/attachfile', 'Admin\InvoiceController@attachfile')->name('admin.invoice.attachfile'); 
-		Route::get('/invoice/getattachfile', 'Admin\InvoiceController@getattachfile')->name('admin.invoice.getattachfile'); 
-		Route::get('/invoice/removeattachfile', 'Admin\InvoiceController@removeattachfile')->name('admin.invoice.removeattachfile'); 
-		Route::get('/invoice/attachfileemail', 'Admin\InvoiceController@attachfileemail')->name('admin.invoice.attachfileemail'); 
-	  //Manage Api key 
-	 // Route::get('/api-key', 'Admin\ApiController@index')->name('admin.apikey.index');
-	  //Manage Api key  
-				      
-	//CMS Pages
-		Route::get('/cms_pages', 'Admin\CmsPageController@index')->name('admin.cms_pages.index');
-		Route::get('/cms_pages/create', 'Admin\CmsPageController@create')->name('admin.cms_pages.create');
-		Route::post('/cms_pages/store', 'Admin\CmsPageController@store')->name('admin.cms_pages.store');
-		Route::get('/cms_pages/edit/{id}', 'Admin\CmsPageController@editCmsPage')->name('admin.edit_cms_page');
-		Route::post('/cms_pages/edit', 'Admin\CmsPageController@editCmsPage')->name('admin.edit_cms_page');
-		
-		//CMS Pages
-		Route::get('/news', 'Admin\NewsController@index')->name('admin.news.index');
-		Route::get('/news/create', 'Admin\NewsController@create')->name('admin.news.create');
-		Route::post('/news/store', 'Admin\NewsController@store')->name('admin.news.store');
-		Route::get('/news/edit/{id}', 'Admin\NewsController@editnewsPage')->name('admin.edit_news_page');
-		Route::post('/news/edit', 'Admin\NewsController@editnewsPage')->name('admin.edit_news_page');
-		
-		//CMS Pages
-		Route::get('/testimonial', 'Admin\TestimonialController@index')->name('admin.testimonial.index');
-		Route::get('/testimonial/create', 'Admin\TestimonialController@create')->name('admin.testimonial.create');
-		Route::post('/testimonial/store', 'Admin\TestimonialController@store')->name('admin.testimonial.store');
-		Route::get('/testimonial/edit/{id}', 'Admin\TestimonialController@edittestimonialPage')->name('admin.edit_testimonial_page');
-		Route::post('/testimonial/edit', 'Admin\TestimonialController@edittestimonialPage')->name('admin.edittestimonialPage');
-	//Email Templates Pages
-		Route::get('/email_templates', 'Admin\EmailTemplateController@index')->name('admin.email.index');
-		Route::get('/email_templates/create', 'Admin\EmailTemplateController@create')->name('admin.email.create');
-		Route::post('/email_templates/store', 'Admin\EmailTemplateController@store')->name('admin.email.store');
-		Route::get('/edit_email_template/{id}', 'Admin\EmailTemplateController@editEmailTemplate')->name('admin.edit_email_template');
-		Route::post('/edit_email_template', 'Admin\EmailTemplateController@editEmailTemplate')->name('admin.edit_email_template');	
-		
-	//SEO Tool
-		Route::get('/edit_seo/{id}', 'Admin\AdminController@editSeo')->name('admin.edit_seo');
-		Route::post('/edit_seo', 'Admin\AdminController@editSeo')->name('admin.edit_seo');
-		
-		Route::get('/api-key', 'Admin\AdminController@editapi')->name('admin.edit_api');
-		Route::post('/api-key', 'Admin\AdminController@editapi')->name('admin.edit_api');	
-		
-		Route::get('/coupon-code', 'Admin\CouponController@index')->name('admin.coupon_code.index');
-		Route::get('/coupon-code/create', 'Admin\CouponController@create')->name('admin.coupon_code.create');
-		Route::post('/coupon-code/store', 'Admin\CouponController@store')->name('admin.coupon_code.store');
-		Route::get('/coupon-code/edit/{id}', 'Admin\CouponController@edit')->name('admin.coupon_code.edit');
-		Route::post('/coupon-code/edit', 'Admin\CouponController@edit')->name('admin.coupon_code.edit');
 
-		Route::get('/bookings', 'Admin\BookingController@index')->name('admin.bookings.index');		
-		Route::get('/log/{id}', 'Admin\BookingController@logs')->name('admin.bookings.log');
-		Route::get('/hotellog/{id}', 'Admin\BookingController@hotellogs')->name('admin.bookings.hotellog');
-		Route::get('/bookings/detail/{id}', 'Admin\BookingController@BookingDetail')->name('admin.bookings.detail');
-		Route::get('/bookings/hoteldetail/{id}', 'Admin\BookingController@hotelBookingDetail')->name('admin.bookings.hoteldetail');
-		
-		//VISA Request Pages
-		Route::get('/visa', 'Admin\VisaController@index')->name('admin.visa.index'); 
-		Route::get('/visa/edit/{id}', 'Admin\VisaController@edit')->name('admin.visa.edit');	
-		Route::post('/visa/edit', 'Admin\VisaController@edit')->name('admin.visa.edit');	
-		Route::get('/visa/create', 'Admin\VisaController@create')->name('admin.visa.create');	
-		
+//Invoices Start    
+Route::get('/invoice', 'Admin\InvoiceController@index')->name('admin.invoice.index');
+Route::get('/invoice/lists/{id}', 'Admin\InvoiceController@lists')->name('admin.invoice.lists');
+Route::get('/invoice/edit/{id}', 'Admin\InvoiceController@edit')->name('admin.invoice.edit');
+Route::post('/invoice/edit', 'Admin\InvoiceController@edit')->name('admin.invoice.edit');
+Route::get('/invoice/create', 'Admin\InvoiceController@create')->name('admin.invoice.create');
+Route::post('/invoice/store', 'Admin\InvoiceController@store')->name('admin.invoice.store');
+Route::get('/invoice/detail', 'Admin\InvoiceController@detail')->name('admin.invoice.detail');
+Route::get('/invoice/email/{id}', 'Admin\InvoiceController@email')->name('admin.invoice.email');
+Route::post('/invoice/email', 'Admin\InvoiceController@email')->name('admin.invoice.email');
+Route::get('/invoice/editpayment', 'Admin\InvoiceController@editpayment')->name('admin.invoice.editpayment');
+Route::get('/invoice/invoicebyid', 'Admin\InvoiceController@invoicebyid')->name('admin.invoice.invoicebyid');
+Route::get('/invoice/history', 'Admin\InvoiceController@history')->name('admin.invoice.history');
+Route::post('/invoice/paymentsave', 'Admin\InvoiceController@paymentsave')->name('admin.invoice.paymentsave');
+Route::post('/invoice/editpaymentsave', 'Admin\InvoiceController@editpaymentsave')->name('admin.invoice.editpaymentsave');
+Route::post('/invoice/addcomment', 'Admin\InvoiceController@addcomment')->name('admin.invoice.addcomment');
+Route::post('/invoice/sharelink', 'Admin\InvoiceController@sharelink')->name('admin.invoice.sharelink');
+Route::post('/invoice/disablelink', 'Admin\InvoiceController@disablelink')->name('admin.invoice.disablelink');
+Route::get('/invoice/download/{id}', 'Admin\InvoiceController@customer_invoice_download')->name('admin.invoice.customer_invoice_download');
+Route::get('/invoice/print/{id}', 'Admin\InvoiceController@customer_invoice_print')->name('admin.invoice.customer_invoice_print');
+Route::get('/invoice/reminder/{id}', 'Admin\InvoiceController@reminder')->name('admin.invoice.reminder');
+Route::post('/invoice/reminder', 'Admin\InvoiceController@reminder')->name('admin.invoice.reminder');
+Route::post('/invoice/attachfile', 'Admin\InvoiceController@attachfile')->name('admin.invoice.attachfile');
+Route::get('/invoice/getattachfile', 'Admin\InvoiceController@getattachfile')->name('admin.invoice.getattachfile');
+Route::get('/invoice/removeattachfile', 'Admin\InvoiceController@removeattachfile')->name('admin.invoice.removeattachfile');
+Route::get('/invoice/attachfileemail', 'Admin\InvoiceController@attachfileemail')->name('admin.invoice.attachfileemail');
+//Manage Api key 
+// Route::get('/api-key', 'Admin\ApiController@index')->name('admin.apikey.index');
+//Manage Api key  
 
-		Route::get('/settings/payment-gateway', 'Admin\PaymentGatewayController@index')->name('admin.paymentgateway');	
-		Route::post('/settings/payment-gateway/store', 'Admin\PaymentGatewayController@store')->name('admin.paymentgateway.store');	
-		
-		Route::get('/settings/api', 'Admin\ApiController@index')->name('admin.api');	
-		Route::post('/settings/api/store', 'Admin\ApiController@store')->name('admin.api.store');
-		Route::post('/settings/api/hotelstore', 'Admin\ApiController@hotelstore')->name('admin.api.hotelstore');
-		
-		Route::get('/settings/sms-gateway', 'Admin\SmsGatewayController@index')->name('admin.smsgateway');	
-		Route::post('/settings/sms-gateway/store', 'Admin\SmsGatewayController@store')->name('admin.smsgateway.store');
-		 
-		Route::get('/settings/bank-accounts', 'Admin\BankAccountController@index')->name('admin.manageaccounts.index');	
-		Route::get('/settings/bank-accounts/create', 'Admin\BankAccountController@create')->name('admin.manageaccounts.create');	
-		Route::get('/settings/bank-accounts/edit/{id}', 'Admin\BankAccountController@edit')->name('admin.manageaccounts.edit');	
-		Route::post('/bank-accounts/store', 'Admin\BankAccountController@store')->name('admin.manageaccounts.store');	
-		Route::post('/bank-accounts/edit', 'Admin\BankAccountController@edit')->name('admin.manageaccounts.edit');	
-	// Flight Markup
-		Route::get('/flightmarkup', 'Admin\FlightmarkupController@index')->name('admin.flightmarkup');	
-		Route::get('/flightmarkup/create', 'Admin\FlightmarkupController@create')->name('admin.flightmarkup.create');	
-		Route::post('/flightmarkup/store', 'Admin\FlightmarkupController@store')->name('admin.flightmarkup.store');	
-		Route::post('/flightmarkup/update', 'Admin\FlightmarkupController@update')->name('admin.flightmarkup.update');	
-		Route::get('/flightmarkup/commission', 'Admin\FlightmarkupController@commission')->name('admin.flightmarkup.commission');	
-	
-	// Profit Loss
-		Route::get('/profitloss', 'Admin\ProfitlossController@index')->name('admin.profitloss');
-		
-	// Service Fees 
-		Route::get('/servicefees', 'Admin\ServicefeesController@index')->name('admin.servicefees');
-		Route::post('/servicefees/store', 'Admin\ServicefeesController@store')->name('admin.servicefees.store');	
-		
-	// Daily Sales Report 
-		Route::get('/report/dailysale', 'Admin\ReportController@dailysale')->name('admin.dailysale');
-	// Ledger Report 
-		Route::get('/report/ledger', 'Admin\ReportController@ledger')->name('admin.ledger');
+//CMS Pages
+Route::get('/cms_pages', 'Admin\CmsPageController@index')->name('admin.cms_pages.index');
+Route::get('/cms_pages/create', 'Admin\CmsPageController@create')->name('admin.cms_pages.create');
+Route::post('/cms_pages/store', 'Admin\CmsPageController@store')->name('admin.cms_pages.store');
+Route::get('/cms_pages/edit/{id}', 'Admin\CmsPageController@editCmsPage')->name('admin.edit_cms_page');
+Route::post('/cms_pages/edit', 'Admin\CmsPageController@editCmsPage')->name('admin.edit_cms_page');
+
+//CMS Pages
+Route::get('/news', 'Admin\NewsController@index')->name('admin.news.index');
+Route::get('/news/create', 'Admin\NewsController@create')->name('admin.news.create');
+Route::post('/news/store', 'Admin\NewsController@store')->name('admin.news.store');
+Route::get('/news/edit/{id}', 'Admin\NewsController@editnewsPage')->name('admin.edit_news_page');
+Route::post('/news/edit', 'Admin\NewsController@editnewsPage')->name('admin.edit_news_page');
+
+//CMS Pages
+Route::get('/testimonial', 'Admin\TestimonialController@index')->name('admin.testimonial.index');
+Route::get('/testimonial/create', 'Admin\TestimonialController@create')->name('admin.testimonial.create');
+Route::post('/testimonial/store', 'Admin\TestimonialController@store')->name('admin.testimonial.store');
+Route::get('/testimonial/edit/{id}', 'Admin\TestimonialController@edittestimonialPage')->name('admin.edit_testimonial_page');
+Route::post('/testimonial/edit', 'Admin\TestimonialController@edittestimonialPage')->name('admin.edittestimonialPage');
+//Email Templates Pages
+Route::get('/email_templates', 'Admin\EmailTemplateController@index')->name('admin.email.index');
+Route::get('/email_templates/create', 'Admin\EmailTemplateController@create')->name('admin.email.create');
+Route::post('/email_templates/store', 'Admin\EmailTemplateController@store')->name('admin.email.store');
+Route::get('/edit_email_template/{id}', 'Admin\EmailTemplateController@editEmailTemplate')->name('admin.edit_email_template');
+Route::post('/edit_email_template', 'Admin\EmailTemplateController@editEmailTemplate')->name('admin.edit_email_template');
+
+//SEO Tool
+Route::get('/edit_seo/{id}', 'Admin\AdminController@editSeo')->name('admin.edit_seo');
+Route::post('/edit_seo', 'Admin\AdminController@editSeo')->name('admin.edit_seo');
+
+Route::get('/api-key', 'Admin\AdminController@editapi')->name('admin.edit_api');
+Route::post('/api-key', 'Admin\AdminController@editapi')->name('admin.edit_api');
+
+Route::get('/coupon-code', 'Admin\CouponController@index')->name('admin.coupon_code.index');
+Route::get('/coupon-code/create', 'Admin\CouponController@create')->name('admin.coupon_code.create');
+Route::post('/coupon-code/store', 'Admin\CouponController@store')->name('admin.coupon_code.store');
+Route::get('/coupon-code/edit/{id}', 'Admin\CouponController@edit')->name('admin.coupon_code.edit');
+Route::post('/coupon-code/edit', 'Admin\CouponController@edit')->name('admin.coupon_code.edit');
+
+Route::get('/bookings', 'Admin\BookingController@index')->name('admin.bookings.index');
+Route::get('/log/{id}', 'Admin\BookingController@logs')->name('admin.bookings.log');
+Route::get('/hotellog/{id}', 'Admin\BookingController@hotellogs')->name('admin.bookings.hotellog');
+Route::get('/bookings/detail/{id}', 'Admin\BookingController@BookingDetail')->name('admin.bookings.detail');
+Route::get('/bookings/hoteldetail/{id}', 'Admin\BookingController@hotelBookingDetail')->name('admin.bookings.hoteldetail');
+
+//VISA Request Pages
+Route::get('/visa', 'Admin\VisaController@index')->name('admin.visa.index');
+Route::get('/visa/edit/{id}', 'Admin\VisaController@edit')->name('admin.visa.edit');
+Route::post('/visa/edit', 'Admin\VisaController@edit')->name('admin.visa.edit');
+Route::get('/visa/create', 'Admin\VisaController@create')->name('admin.visa.create');
+
+
+Route::get('/settings/payment-gateway', 'Admin\PaymentGatewayController@index')->name('admin.paymentgateway');
+Route::post('/settings/payment-gateway/store', 'Admin\PaymentGatewayController@store')->name('admin.paymentgateway.store');
+
+Route::get('/settings/api', 'Admin\ApiController@index')->name('admin.api');
+Route::post('/settings/api/store', 'Admin\ApiController@store')->name('admin.api.store');
+Route::post('/settings/api/hotelstore', 'Admin\ApiController@hotelstore')->name('admin.api.hotelstore');
+
+Route::get('/settings/sms-gateway', 'Admin\SmsGatewayController@index')->name('admin.smsgateway');
+Route::post('/settings/sms-gateway/store', 'Admin\SmsGatewayController@store')->name('admin.smsgateway.store');
+
+Route::get('/settings/bank-accounts', 'Admin\BankAccountController@index')->name('admin.manageaccounts.index');
+Route::get('/settings/bank-accounts/create', 'Admin\BankAccountController@create')->name('admin.manageaccounts.create');
+Route::get('/settings/bank-accounts/edit/{id}', 'Admin\BankAccountController@edit')->name('admin.manageaccounts.edit');
+Route::post('/bank-accounts/store', 'Admin\BankAccountController@store')->name('admin.manageaccounts.store');
+Route::post('/bank-accounts/edit', 'Admin\BankAccountController@edit')->name('admin.manageaccounts.edit');
+// Flight Markup
+Route::get('/flightmarkup', 'Admin\FlightmarkupController@index')->name('admin.flightmarkup');
+Route::get('/flightmarkup/create', 'Admin\FlightmarkupController@create')->name('admin.flightmarkup.create');
+Route::post('/flightmarkup/store', 'Admin\FlightmarkupController@store')->name('admin.flightmarkup.store');
+Route::post('/flightmarkup/update', 'Admin\FlightmarkupController@update')->name('admin.flightmarkup.update');
+Route::get('/flightmarkup/commission', 'Admin\FlightmarkupController@commission')->name('admin.flightmarkup.commission');
+
+// Profit Loss
+Route::get('/profitloss', 'Admin\ProfitlossController@index')->name('admin.profitloss');
+
+// Service Fees 
+Route::get('/servicefees', 'Admin\ServicefeesController@index')->name('admin.servicefees');
+Route::post('/servicefees/store', 'Admin\ServicefeesController@store')->name('admin.servicefees.store');
+
+// Daily Sales Report 
+Route::get('/report/dailysale', 'Admin\ReportController@dailysale')->name('admin.dailysale');
+// Ledger Report 
+Route::get('/report/ledger', 'Admin\ReportController@ledger')->name('admin.ledger');
 // Wallet Page 
-		Route::get('/wallet/index', 'Admin\WalletController@index')->name('admin.wallet.index'); 
-		Route::get('/wallet/crdr', 'Admin\WalletController@crdr')->name('admin.wallet.crdr'); 
-		Route::get('/wallet/create', 'Admin\WalletController@create')->name('admin.wallet.create'); 
-		Route::post('/wallet/store', 'Admin\WalletController@store')->name('admin.wallet.store'); 
-		Route::get('/wallet/edit/{id}', 'Admin\WalletController@edit')->name('admin.wallet.edit'); 
-		Route::post('/wallet/edit', 'Admin\WalletController@edit')->name('admin.wallet.edit'); 	
-		Route::get('/wallet/view/{id}', 'Admin\WalletController@show')->name('admin.wallet.view'); 
-		Route::get('/wallet/excel_waller_log', 'Admin\WalletController@excelReport')->name('admin.excel_waller_log'); 
-		//Flight Pages
-		Route::get('/flights', 'Admin\FlightsController@index')->name('admin.flights.index'); 
-		Route::get('/flights/edit/{id}', 'Admin\FlightsController@edit')->name('admin.flights.edit');	
-		Route::post('/flights/edit', 'Admin\FlightsController@edit')->name('admin.flights.edit');	
-		Route::get('/flights/create', 'Admin\FlightsController@create')->name('admin.flights.create');	
-		Route::post('/flights/store', 'Admin\FlightsController@store')->name('admin.flights.store');
-		
-		//Flight Pages APIs
-		Route::get('/flights-apis', 'Admin\FlightsApisController@index')->name('admin.flightsapis.index'); 
-		Route::get('/flights-apis/edit/{id}', 'Admin\FlightsApisController@edit')->name('admin.flightsapis.edit');	
-		Route::post('/flights-apis/edit', 'Admin\FlightsApisController@edit')->name('admin.flightsapis.edit');	
-		Route::get('/flights-apis/create', 'Admin\FlightsApisController@create')->name('admin.flightsapis.create');	
-		Route::post('/flights-apis/store', 'Admin\FlightsApisController@store')->name('admin.flightsapis.store');
+Route::get('/wallet/index', 'Admin\WalletController@index')->name('admin.wallet.index');
+Route::get('/wallet/crdr', 'Admin\WalletController@crdr')->name('admin.wallet.crdr');
+Route::get('/wallet/create', 'Admin\WalletController@create')->name('admin.wallet.create');
+Route::post('/wallet/store', 'Admin\WalletController@store')->name('admin.wallet.store');
+Route::get('/wallet/edit/{id}', 'Admin\WalletController@edit')->name('admin.wallet.edit');
+Route::post('/wallet/edit', 'Admin\WalletController@edit')->name('admin.wallet.edit');
+Route::get('/wallet/view/{id}', 'Admin\WalletController@show')->name('admin.wallet.view');
+Route::get('/wallet/excel_waller_log', 'Admin\WalletController@excelReport')->name('admin.excel_waller_log');
+//Flight Pages
+Route::get('/flights', 'Admin\FlightsController@index')->name('admin.flights.index');
+Route::get('/flights/edit/{id}', 'Admin\FlightsController@edit')->name('admin.flights.edit');
+Route::post('/flights/edit', 'Admin\FlightsController@edit')->name('admin.flights.edit');
+Route::get('/flights/create', 'Admin\FlightsController@create')->name('admin.flights.create');
+Route::post('/flights/store', 'Admin\FlightsController@store')->name('admin.flights.store');
 
-	//Flight Details Pages
-		Route::get('/flight-detail', 'Admin\FlightsController@FlightDetailindex')->name('admin.flightdetail.index'); 
-		Route::get('/flight-detail/edit/{id}', 'Admin\FlightsController@FlightDetailindexEdit')->name('admin.flightdetail.edit');	
-		Route::post('/flight-detail/edit', 'Admin\FlightsController@FlightDetailindexEdit')->name('admin.flightdetail.edit');	
-		Route::get('/flight-detail/create', 'Admin\FlightsController@FlightDetailindexCreate')->name('admin.flightdetail.create');	
-		Route::post('/flight-detail/store', 'Admin\FlightsController@FlightDetailindexStore')->name('admin.flightdetail.store');
-		
-		Route::get('/flight-detail/clone/{id}', 'Admin\FlightsController@FlightDetailindexClone')->name('admin.flightdetail.clone');
-		Route::post('/flight-detail/clone', 'Admin\FlightsController@FlightDetailindexClone')->name('admin.flightdetail.clone');
-		Route::get('/getFlights', 'Admin\FlightsController@getFlights')->name('getFlights');
-		Route::get('/searchFlights', 'Admin\FlightsController@searchFlights')->name('searchFlights');
-		
-		Route::get('/photo-gallery/getlist', 'Admin\MediaController@getlist')->name('admin.photo.getlist');
-		Route::post('/photo-gallery/uploadlist', 'Admin\MediaController@uploadlist')->name('admin.photo.uploadlist');
-		Route::post('/photo-gallery/update_action', 'Admin\MediaController@update_action')->name('admin.photo.update_action');
+//Flight Pages APIs
+Route::get('/flights-apis', 'Admin\FlightsApisController@index')->name('admin.flightsapis.index');
+Route::get('/flights-apis/edit/{id}', 'Admin\FlightsApisController@edit')->name('admin.flightsapis.edit');
+Route::post('/flights-apis/edit', 'Admin\FlightsApisController@edit')->name('admin.flightsapis.edit');
+Route::get('/flights-apis/create', 'Admin\FlightsApisController@create')->name('admin.flightsapis.create');
+Route::post('/flights-apis/store', 'Admin\FlightsApisController@store')->name('admin.flightsapis.store');
 
-	
+//Flight Details Pages
+Route::get('/flight-detail', 'Admin\FlightsController@FlightDetailindex')->name('admin.flightdetail.index');
+Route::get('/flight-detail/edit/{id}', 'Admin\FlightsController@FlightDetailindexEdit')->name('admin.flightdetail.edit');
+Route::post('/flight-detail/edit', 'Admin\FlightsController@FlightDetailindexEdit')->name('admin.flightdetail.edit');
+Route::get('/flight-detail/create', 'Admin\FlightsController@FlightDetailindexCreate')->name('admin.flightdetail.create');
+Route::post('/flight-detail/store', 'Admin\FlightsController@FlightDetailindexStore')->name('admin.flightdetail.store');
+
+Route::get('/flight-detail/clone/{id}', 'Admin\FlightsController@FlightDetailindexClone')->name('admin.flightdetail.clone');
+Route::post('/flight-detail/clone', 'Admin\FlightsController@FlightDetailindexClone')->name('admin.flightdetail.clone');
+Route::get('/getFlights', 'Admin\FlightsController@getFlights')->name('getFlights');
+Route::get('/searchFlights', 'Admin\FlightsController@searchFlights')->name('searchFlights');
+
+Route::get('/photo-gallery/getlist', 'Admin\MediaController@getlist')->name('admin.photo.getlist');
+Route::post('/photo-gallery/uploadlist', 'Admin\MediaController@uploadlist')->name('admin.photo.uploadlist');
+Route::post('/photo-gallery/update_action', 'Admin\MediaController@update_action')->name('admin.photo.update_action');
+
+
 // });     
+
+Route::get('/agent-signup', 'AgentsignupController@index')->name('agent-signup.index');	
+// Route::post('/forgot_password', 'HomeController@forgotPassword')->name('forgot_password');	
+// Route::get('/reset_link/{token}', 'HomeController@resetLink')->name('reset_link');	
+// Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');
+//Forgot Password 
+ Route::get('/forgot_password', 'HomeController@forgotPassword')->name('forgot_password');	
+Route::post('/forgot_password', 'HomeController@forgotPassword')->name('forgot_password');	
+Route::post('/user/register','Auth\RegisterController@register')->name('user.register');
+
+Route::controller(Admin\RolesController::class)->group(function () {
+	Route::prefix('department')->name('department')->group(function () {
+		Route::get('/', 'index')->name('department');
+		Route::get('/add', 'create')->name('department.create');
+		Route::get('/superAdmin', 'superAdmin')->name('superAdmin');
+		Route::post('/superAdmin/add', 'superAdminStore')->name('superAdminStore');
+	});
+});

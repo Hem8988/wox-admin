@@ -336,7 +336,8 @@ ul.award li{    color: #4C4C4D; padding: 4px 2px;     font-size: 12px;}
 							</div><!-- .block-title end -->
 							<div class="content">
 								<div class="left">
-									<form id="form-register" action="{{ route('register') }}" class="rounded">
+									<form id="form-register" action="{{ url('register') }}" class="rounded">
+									{{-- <form id="form-register" action="{{ route('register') }}" class="rounded"> --}}
 										<div class="form-content">
 											<div class="form-group">
 												<label for="registerFullname">Full Name</label>

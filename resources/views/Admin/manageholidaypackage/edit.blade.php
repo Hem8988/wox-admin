@@ -200,10 +200,9 @@
 													<select name="city" data-valid="required" id="city"
 														class="form-control" autocomplete="new-password">
 														<option value="">Choose One...</option>
-														@foreach(\App\City::where('user_id',@Auth::user()->id)->orderby('name','ASC')->get()
-														as $clist)
+														@foreach(\App\City::where('user_id',@Auth::user()->id)->orderby('name','ASC')->get() as $clist)
 														<option value="{{$clist->id}}" <?php if($fetchedData->city ==
-															$clist->id){ echo 'selected'; } ?>>{{$clist->name}}</option>
+															$clist->id){ echo 'selected'; } ?>> {{ $clist->name}}</option>
 														@endforeach
 													</select>
 													@if ($errors->has('city'))
