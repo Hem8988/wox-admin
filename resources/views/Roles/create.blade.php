@@ -93,7 +93,7 @@
                         $color_random = $min_cat['color_code'];
                     ?>
                                     <li class="nav-item">
-                                        <a class="nav-link <?= $min_cat['id'] == 1 ? 'active' : '' ?> tabSet"
+                                        <a class="nav-link <?= $min_cat['id'] == 1 ? '' : '' ?> tabSet"
                                             data-bs-toggle="tab" href="#<?= $min_cat['categoriname'] ?>" role="tab">
                                             <span>
                                                 <?= ucfirst($min_cat['categoriname']) ?>
