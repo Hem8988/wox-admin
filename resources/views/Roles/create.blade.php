@@ -2,14 +2,30 @@
 @section('title', 'Users')
 
 @section('content')
+
+<style>
+    .row_permission label input {
+        margin-right: 10px;
+    }
+</style>
+
 <!-- orignaol form -->
 <div class="content-wrapper">
+    <div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0 text-dark">Assign Permissions</h1>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</div>
     <section class="content">
         <div class="container-fluid">
             <form class="form-horizontal needs-validation" method="POST" id="create_role" novalidate
                 action="<?= 'Superadmin/save_create'; ?>">
-                <div class="portlet box blue mb-4">
-                    <div class="portlet-body">
+                <div class="card">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="name" class="control-label">Role Name
@@ -66,85 +82,79 @@
                     </div>
                 </div>
                 <?php
-if (!empty(permissionCategory())) {
-?>
-                <div class="portlet box blue">
-                    <div class="portlet-title">
-                        <div class="caption"><i class="fa-solid fa-user-gear"></i> Assign Permissions</div>
-                    </div>
-                    <div class="portlet-body">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-pills roles_nav_pills" role="tablist">
-                            <?php
-            $color = array('#F26A6D', '#FCC56E', '#96BB7F', '#44c9c7', '#ff43a5');
-            foreach (permissionCategory() as $key => $min_cat) {
-                $color_random = $min_cat['color_code'];
-            ?>
-                            <li class="nav-item">
-                                <a class="nav-link <?= $min_cat['id'] == 1 ? 'active' : '' ?> tabSet"
-                                    data-bs-toggle="tab" href="#<?= $min_cat['categoriname'] ?>" role="tab">
-                                    <span>
-                                        <?= ucfirst($min_cat['categoriname']) ?>
-                                    </span>
-                                    <span class="badge badge-primary ms-2 <?= $min_cat['categoriname'] ?>"
-                                        style=" background-color: <?= $color_random; ?>;">
-                                        <?= countTotalMainPer(!empty($role) ? $role->id : '',  $min_cat['id'] ); ?>
-                                    </span>
-                                </a>
-                            </li>
-                            <?php
-            }
-            ?>
-                        </ul>
-                        <?php
-        if (!empty(permissionCategory())) {
-        ?>
-                        <div class="tab-content mt-4">
-                            <?php foreach (permissionCategory() as $key => $min_cat) {
-
-                    $color_random = $color[array_rand($color)];
+                    if (!empty(permissionCategory())) {
                 ?>
-                            <div class="tab-pane <?= $min_cat['id']  ==  1 ? 'active' : '' ?>"
-                                id="<?= $min_cat['categoriname'] ?>" role="tabpanel">
-                                <div class="row row_permission">
-                                    <div class="container_roles">
-                                        <div class="row">
-                                            <div class="box_body">
-                                                <div class="row">
-                                                    <?php
-                                                    $permissions = get_permission($min_cat['id']);
-                                                    if ($permissions) {
-                                                        foreach ($permissions as $permission) {
-                                                            $pr_get = isset($_GET['id']) ? chekRolper($_GET['id'], $permission->permission_slug) : '';
-                                                            $checked = !empty($pr_get && $pr_get == $permission->permission_slug) ? 'checked' : '';
-                                                    ?>
-                                                    <div class="col-md-6 mb-2">
-                                                        <label class="form-check-label d-flex align-items-center"
-                                                            for="checbox_<?= $permission->permission_slug; ?>">
-                                                            <input type="checkbox"
-                                                                id="checbox_<?= $permission->permission_slug; ?>"
-                                                                name="permission[]"
-                                                                value="<?= $permission->permission_slug ?>"
-                                                                class='permission me-3 box_body_checkbox checkboxClass'
-                                                                <?=$checked; ?>>
-                                                            <?= ucfirst($permission->permissionName); ?>
-                                                        </label>
-                                                    </div>
-                                                    <?php  }
-                                                    } ?>
-                                                </div>
-                                            </div>
 
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills roles_nav_pills mt-4" role="tablist">
+                    <?php
+                        $color = array('#F26A6D', '#FCC56E', '#96BB7F', '#44c9c7', '#ff43a5');
+                        foreach (permissionCategory() as $key => $min_cat) {
+                        $color_random = $min_cat['color_code'];
+                    ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?= $min_cat['id'] == 1 ? 'active' : '' ?> tabSet"
+                                            data-bs-toggle="tab" href="#<?= $min_cat['categoriname'] ?>" role="tab">
+                                            <span>
+                                                <?= ucfirst($min_cat['categoriname']) ?>
+                                            </span>
+                                            <span class="badge badge-primary ms-2 <?= $min_cat['categoriname'] ?>"
+                                                style=" background-color: <?= $color_random; ?>;">
+                                                <?= countTotalMainPer(!empty($role) ? $role->id : '',  $min_cat['id'] ); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <?php
+                    }
+                    ?>
+                </ul>
+                <?php
+                    if (!empty(permissionCategory())) {
+                ?>
+                <div class="tab-content mt-4">
+                    <?php foreach (permissionCategory() as $key => $min_cat) {
+                        $color_random = $color[array_rand($color)];
+                    ?>
+                    <div class="tab-pane <?= $min_cat['id']  ==  1 ? 'active' : '' ?>"
+                        id="<?= $min_cat['categoriname'] ?>" role="tabpanel">
+                        <div class="row_permission">
+                            <div class="container_roles">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <?php
+                                            $permissions = get_permission($min_cat['id']);
+                                            if ($permissions) {
+                                                foreach ($permissions as $permission) {
+                                                    $pr_get = isset($_GET['id']) ? chekRolper($_GET['id'], $permission->permission_slug) : '';
+                                                    $checked = !empty($pr_get && $pr_get == $permission->permission_slug) ? 'checked' : '';
+                                            ?>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-check-label d-flex align-items-center"
+                                                    for="checbox_<?= $permission->permission_slug; ?>">
+                                                    <input type="checkbox"
+                                                        id="checbox_<?= $permission->permission_slug; ?>"
+                                                        name="permission[]"
+                                                        value="<?= $permission->permission_slug ?>"
+                                                        class='permission me-3 box_body_checkbox checkboxClass'
+                                                        <?=$checked; ?>>
+                                                    <?= ucfirst($permission->permissionName); ?>
+                                                </label>
+                                            </div>
+                                            <?php  }
+                                            } ?>
                                         </div>
                                     </div>
 
                                 </div>
-                                <?php } ?>
                             </div>
-                            <?php } ?>
+
                         </div>
+                        <?php } ?>
                     </div>
-                    <?php
+                    <?php } ?>
+                </div>
+            <?php
 } ?>
                     <div class="mt-4  text-end">
                         <button type="submit" class="btn btn-success save_per">Save</button>
@@ -153,7 +163,6 @@ if (!empty(permissionCategory())) {
                     <div class="roleRes"></div>
             </form>
             <!-- orignaol form end -->
-        </div>
     </section>
 </div>
 
