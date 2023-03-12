@@ -96,9 +96,9 @@
 															<div class="info_value" id="pop_up_browser"><span class="asession_browser_popup minibrowser_googlechrome"></span><span>{{$session->browser ?? ''}}</span></div>
 														</div>
 														<div class="info_div">
-															<div class="info_lable">Location</div>
-															<?php $data = file_get_contents("http://api.hostip.info/country.php?ip=".$session->ip); 
-															echo ($data);?>
+															<!-- <div class="info_lable">Location</div> -->
+															<?php //$data = file_get_contents("http://api.hostip.info/country.php?ip=".$session->ip); 
+															//echo ($data);?>
 															<!-- <div class="info_value location_unavail" id="pop_up_location">Chandigarh, Chandigarh, India</div> -->
 															<div class="info_ip"></div>
 														</div>		
