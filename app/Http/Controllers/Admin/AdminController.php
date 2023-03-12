@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Redirect;
 
+use App\LoginSessions;
 use App\Lead;
 use App\Admin;
 use App\WebsiteSetting;
@@ -1700,6 +1701,7 @@ class AdminController extends Controller
 	} 
 	public function sessions(Request $request)
 	{
-		return view('Admin.sessions');		
+		$loginSession = LoginSessions::where('user_id',Auth::user()->id)->latest()->get();
+		return view('Admin.sessions',compact('loginSession'));		
 	} 
 }

@@ -1455,6 +1455,7 @@ jQuery(document).ready(function($){
 });	
 });
 </script>
+ 
 @yield('scripts')	
 	</body>
 </html> 
