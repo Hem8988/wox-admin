@@ -179,4 +179,6 @@ function getOS() {
         $request->session()->regenerate();
 		return redirect('/');
     }
+
+    
 }

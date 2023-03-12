@@ -57,6 +57,7 @@ class LoginController extends Controller
 	
 	public function authenticated(Request $request, $user)
     {		
+        Auth::logoutOtherDevices($request->password);
 		if(!empty($request->remember)) {
 			\Cookie::queue(\Cookie::make('email', $request->email, 3600));
 			\Cookie::queue(\Cookie::make('password', $request->password, 3600));
@@ -111,4 +112,5 @@ class LoginController extends Controller
    
    
     }
+    
 }
