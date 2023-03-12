@@ -60,7 +60,7 @@
 										<div class="activesession_entry_info">
 											<div class="asession_os {{!empty($session->os) && $session->os == 'Mac' ? 'os_windows' : ''}} {{!empty($session->os) && $session->os == 'Linux' ? 'os_linux' : ''}} {{!empty($session->os) && $session->os == 'Windows' ? 'os_windows' : ''}}" data-tippy="" data-original-title=""></div>
 											<div class="asession_browser {{!empty($session->browser) && $session->browser == 'Apple Safari' ? 'browser_safari' : ''}} {{!empty($session->browser) && $session->browser == 'Google Chrome' ? 'browser_googlechrome' : ''}} " data-tippy="" data-original-title=""></div>
-											<div class="asession_ip hide">{{$session->ip ?? ''}}</div>
+											<div class="asession_ip ">{{$session->ip ?? ''}}</div>
 											<div class="asession_location">{{$session->os ?? ''}}</div>
 											<div class="asession_location">{{$session->browser ?? ''}}</div>
 											@if($k == 0)
@@ -96,11 +96,11 @@
 															<div class="info_value" id="pop_up_browser"><span class="asession_browser_popup minibrowser_googlechrome"></span><span>{{$session->browser ?? ''}}</span></div>
 														</div>
 														<div class="info_div">
-															<!-- <div class="info_lable">Location</div> -->
+															<div class="info_lable">IP</div>
 															<?php //$data = file_get_contents("http://api.hostip.info/country.php?ip=".$session->ip); 
 															//echo ($data);?>
 															<!-- <div class="info_value location_unavail" id="pop_up_location">Chandigarh, Chandigarh, India</div> -->
-															<div class="info_ip"></div>
+															<div class="info_ip">{{$session->ip ?? ''}}</div>
 														</div>		
 													</div>		
 												</div>
