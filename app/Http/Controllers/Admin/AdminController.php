@@ -1700,8 +1700,8 @@ class AdminController extends Controller
 		return view('Admin.multi_factor');		
 	} 
 	public function sessions(Request $request)
-	{
-		$loginSession = LoginSessions::where('user_id',Auth::user()->id)->latest()->get();
+	{ 
+		$loginSession = LoginSessions::latest()->get(); 
 		return view('Admin.sessions',compact('loginSession'));		
 	} 
 }

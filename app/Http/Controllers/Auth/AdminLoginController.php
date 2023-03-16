@@ -23,9 +23,10 @@ class AdminLoginController extends Controller
      *
      * @return void
      */
+    
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 	
     /**
@@ -145,12 +146,11 @@ function getOS() {
 	public function authenticated(Request $request, $user)
     {		
         // dd($request->all());
-         
 		if(!empty($request->remember)) {
-			\Cookie::queue(\Cookie::make('email', $request->email, 3600));
+            \Cookie::queue(\Cookie::make('email', $request->email, 3600));
 			\Cookie::queue(\Cookie::make('password', $request->password, 3600));
 		} else {
-			\Cookie::queue(\Cookie::forget('email'));
+            \Cookie::queue(\Cookie::forget('email'));
 			\Cookie::queue(\Cookie::forget('password'));
 		}
         $ip =  $_SERVER['REMOTE_ADDR'];
@@ -162,13 +162,14 @@ function getOS() {
             'os'=>$os ?? '',
             'browser'=>$browser ?? '', 
         ]);
-
-
+        
+        
 		$obj = new LoginLog;
 		$obj->user_id = $user->id;
 		$obj->ip = $_SERVER['REMOTE_ADDR'];
 		$obj->date = date('Y-m-d h:i:s');
 		$obj->save();
+        Auth::logoutOtherDevices($request->password);
         return redirect()->intended($this->redirectPath());
     }
 	
