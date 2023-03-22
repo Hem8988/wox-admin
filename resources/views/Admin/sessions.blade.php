@@ -19,7 +19,7 @@
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</div>
-<!-- Main content --> 
+	<!-- Main content -->
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -30,56 +30,60 @@
 					</div>
 					<!-- Flash Message End -->
 				</div>
-			</div>	
+			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="card card-primary sessions">  
-						<div class="card-header"> 
+					<div class="card card-primary sessions">
+						<div class="card-header">
 							<h3 class="card-title">Active Sessions</h3>
-							<p>View and manage all of your active sessions.</p> 
-						</div>   
-						@if(!empty($loginSession))
+							<p>View and manage all of your active sessions.</p>
+						</div>
+						@if(!empty($loginSession) && count($loginSession) > 0)
 						@foreach($loginSession as $k=> $session)
 						<div class="card-body session_body">
-							<div id="current_sesion">		
-								<div class="Field_session cus_session_1" id="activesession_entry6" data-toggle="modal" data-target="#myModal">							 
-									<div class="info_tab">									
-										<div class="device_div"> 
+							<div id="current_sesion">
+								<div class="Field_session cus_session_1" id="activesession_entry6">
+									<div class="info_tab">
+										<div class="device_div">
 											<span class="device_pic device_personalcomputer"></span>
 											<span class="device_details">
-												<span class="device_name">Personal Computer</span>
+												<span class="device_name">PC : {{!empty($session->user_id) ? getusername($session->user_id) : ''}}</span>
 												<?php
 
-													$date1 = new DateTime($session->created_at);
-													$date2 = new DateTime(date('m/d/Y h:i:s a', time()));
-													$interval = $date1->diff($date2);   	
-													?>
+												$date1 = new DateTime($session->created_at);
+												$date2 = new DateTime(date('m/d/Y h:i:s a', time()));
+												$interval = $date1->diff($date2);
+												?>
 												<span class="device_time">{{$interval->y . " years, " . $interval->m." months, ".$interval->d." days "}} days ago</span>
 											</span>
-										</div> 
+										</div>
 										<div class="activesession_entry_info">
 											<div class="asession_os {{!empty($session->os) && $session->os == 'Mac' ? 'os_windows' : ''}} {{!empty($session->os) && $session->os == 'Linux' ? 'os_linux' : ''}} {{!empty($session->os) && $session->os == 'Windows' ? 'os_windows' : ''}}" data-tippy="" data-original-title=""></div>
 											<div class="asession_browser {{!empty($session->browser) && $session->browser == 'Apple Safari' ? 'browser_safari' : ''}} {{!empty($session->browser) && $session->browser == 'Google Chrome' ? 'browser_googlechrome' : ''}} " data-tippy="" data-original-title=""></div>
 											<div class="asession_ip ">{{$session->ip ?? ''}}</div>
 											<div class="asession_location">{{$session->os ?? ''}}</div>
 											<div class="asession_location">{{$session->browser ?? ''}}</div>
-											@if($k == 0)
-											<div class="asession_action current">Current Session</div>
-											@endif
+										 
+
+
+											<div class="asession_action text-danger current"><a data-id="{{$session->user_id}}" class='kill_session'>Kill session</a></div>
+											<div data-toggle="modal" data-target="#myModal" class="asession_action current">Session Detail </div>
+
 										</div>
-									</div>  
+									</div>
 									<div id="myModal" class="modal fade" role="dialog">
-									<div class="modal-dialog modal-md">
+										<div class="modal-dialog modal-md">
 											<div class="modal-content">
 												<div class="modal-body">
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
-													<div class="device_div on_popup">			
+													<div class="device_div on_popup">
 														<span id="device_pic" class="device_personalcomputer"></span>
 														<span class="device_details">
+															<span class="device_name">{{!empty($session->user_id) ? getusername($session->user_id) : ''}}</span>
 															<span class="device_name">Personal Computer</span>
-															<span class="device_time">{{$interval->y . " years, " . $interval->m." months, ".$interval->d." days "}} days ago</span>
+															<span class="device_time">{{$interval->y . " years, " . $interval->m." months, ".$interval->d." days "}} ago</span>
 														</span>
 													</div>
 													<div id="sessions_current_info" class="list_show">
@@ -89,7 +93,9 @@
 														</div>
 														<div class="info_div">
 															<div class="info_lable">Operating System</div>
-															<div class="info_value" id="pop_up_os"><div class="asession_os_popup minios_windows"></div><span>{{$session->os ?? ''}}</span></div>
+															<div class="info_value" id="pop_up_os">
+																<div class="asession_os_popup minios_windows"></div><span>{{$session->os ?? ''}}</span>
+															</div>
 														</div>
 														<div class="info_div">
 															<div class="info_lable">Browser</div>
@@ -98,16 +104,17 @@
 														<div class="info_div">
 															<div class="info_lable">IP</div>
 															<?php //$data = file_get_contents("http://api.hostip.info/country.php?ip=".$session->ip); 
-															//echo ($data);?>
+															//echo ($data);
+															?>
 															<!-- <div class="info_value location_unavail" id="pop_up_location">Chandigarh, Chandigarh, India</div> -->
 															<div class="info_ip">{{$session->ip ?? ''}}</div>
-														</div>		
-													</div>		
+														</div>
+													</div>
 												</div>
-											</div> 
+											</div>
 										</div>
-</div>
-								<!-- 	<div class="aw_info modal fade" id="activesession_info6">	
+									</div>
+									<!-- 	<div class="aw_info modal fade" id="activesession_info6">	
 										<div class="modal-dialog modal-md">
 											<div class="modal-content">
 												<div class="modal-body">
@@ -144,7 +151,7 @@
 											</div> 
 										</div>
 									</div>  -->
-								</div>			
+								</div>
 							</div>
 							<!-- <div id="other_sesion">		
 								<div class="Field_session cus_session_2" id="activesession_entry1" onclick="show_selected_session(1,'device_personalcomputer');">
@@ -419,6 +426,16 @@
 							</div> -->
 						</div>
 						@endforeach
+						@else
+						<div class="card-body session_body">
+							<div id="current_sesion">
+								<div class="Field_session cus_session_1" id="activesession_entry6" data-toggle="modal" data-target="#myModal">
+									<div class="info_tab">
+										Nothing to show !
+									</div>
+								</div>
+							</div>
+						</div>
 						@endif
 					</div>
 				</div>
@@ -426,6 +443,36 @@
 		</div>
 	</section>
 </div>
+<form id="session_form" action="{{ url('logout') }}" method="POST"  >
+	@csrf
+	<input type='hidden' name='otheruser' value='1'>
+	<input type='hidden' name='user_id' class='user_id'>
+</form>
 @endsection
 
- 
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	jQuery(document).ready(function(){
+		$('.kill_session').click(function(e) { 
+			e.preventDefault();
+			var id = $(this).data('id'); 
+			$('.user_id').val(id);
+			Swal.fire({
+				title: 'Are you sure you want to kill session for this user !', 
+				showCancelButton: true,
+				confirmButtonText: 'Yes',
+				denyButtonText: `Cancel`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire('Session deleted successfully');
+					setTimeout(() => {
+						$('#session_form').submit(); 
+						// window.location.reload();
+					}, 2000);
+				}
+			});
+		});
+	});
+</script>
+@endsection

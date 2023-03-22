@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin;
 use App\Airport;
 use Illuminate\Support\Carbon;
 use App\PermissionCategory;
@@ -509,6 +510,11 @@ function getAmenities($data)
 }
 
 
+function getusername($id)
+{
+	$user = Admin::where('id',$id)->first();
+	return ucfirst($user->first_name) .' '.$user->last_name ?? '';
+}
 function permissionCategory()
 {
 	$permissionCategory = PermissionCategory::all();

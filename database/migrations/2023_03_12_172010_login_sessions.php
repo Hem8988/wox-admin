@@ -15,7 +15,7 @@ class LoginSessions extends Migration
     {
         Schema::create('login_sessions', function (Blueprint $table) {
             $table->id();
-            $table->text('ip')->unique();
+            $table->text('ip')->nullable(); 
             $table->text('browser')->nullable();
             $table->text('os')->nullable(); 
             $table->text('user_id')->nullable(); 
