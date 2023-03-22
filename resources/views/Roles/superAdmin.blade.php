@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Designation Name</h1>
+                    <h1 class="m-0 text-dark">Sub Admin</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Designation Name</li>
+                        <li class="breadcrumb-item active">Sub Admin</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -47,8 +47,8 @@
                             <div class="card-tools card_tools">
                                 {{-- <a href="javascript:;" data-toggle="modal" data-target="#amnetsearch_modal"
                                     class="btn btn-primary"><i class="fas fa-filter"></i> Filter</a> --}}
-                                <a href="{{  ('department/add') }}"
-                                    class="btn btn-primary"><i class="fas fa-plus"></i> Add Designation</a>
+                                <a href="{{  ('sub-admin/add') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
+                                    Add Sub admin</a>
                             </div>
                             {{-- <div class="print_export">
                                 <ul>
@@ -66,31 +66,28 @@
                                 <thead>
                                     <tr>
                                         <th>Ser No.</th>
-                                        <th>Role Name</th>
-                                        <th>Position</th>
-                                        <th>Created Date</th>
-                                        <th>Is Active</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        {{-- <th>Is Active</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdata">
-                                    @if(@$lists)
-                                    @foreach (@$lists as $key=> $list)
+                                    @if(@$admin)
+                                    @foreach (@$admin as $key=> $list)
                                     <tr id="id_{{@$list->id}}">
                                         <td>
                                             {{ $key+1 }}
                                         </td>
-                                        <td>{{ @ucfirst($list->name) }}</td>
-                                        <td>{{ @$list->position }}</td>
-                                        @php
-                                            $date=date_create($list->Position);
-                                        @endphp
-                                        <td>{{ @date_format($date,"d-m-Y") }}</td>
+                                        <td>{{ @ucfirst($list->first_name) . $list->last_name }}</td>
+                                        <td>{{ @$list->email }}</td>
+                                        <td>{{ @$list->phone }}</td>
 
-                                        <td><input data-id="{{@$list->id}}" data-status="{{@$list->status}}"
+                                        {{-- <td><input data-id="{{@$list->id}}" data-status="{{@$list->status}}"
                                                 data-col="status" data-table="users" class="change-status" value="1"
                                                 type="checkbox" name="is_active" {{ (@$list->status == 1 ? 'checked' :
-                                            '')}} data-bootstrap-switch></td>
+                                            '')}} data-bootstrap-switch></td> --}}
                                         <td>
                                             <div class="nav-item dropdown action_dropdown cus_action_btn">
                                                 <a class="nav-link dropdown-toggle action_btn btn btn-primary btn-rounded btn-xs"
@@ -98,11 +95,14 @@
                                                         class="caret"></span></a>
                                                 <div class="dropdown-menu">
                                                     <a
-                                                        href="{{URL::to('/users/view/'.base64_encode(convert_uuencode(@$list->id)))}}"><i
+                                                        href="{{URL::to('/department/user-view/'.base64_encode(convert_uuencode(@$list->id)))}}"><i
                                                             class="fa fa-eye"></i> View Detail</a>
                                                     <a
-                                                        href="{{URL::to('/users/send-password/'.base64_encode(convert_uuencode(@$list->id)))}}"><i
-                                                            class="fa fa-edit"></i> Send Password</a>
+                                                        href="{{URL::to('department/sub-admin/add/'.base64_encode(convert_uuencode(@$list->id)))}}"><i
+                                                            class="fa fa-edit"></i> Edit</a>
+                                                    <a
+                                                        href="{{URL::to('department/sub-admin/delete/'.base64_encode(convert_uuencode(@$list->id)))}}"><i
+                                                            class="fa fa-edit"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>

@@ -9,9 +9,9 @@
 		<a href="#" class="nav-link">Home</a>
 	  </li>
 	  <li class="nav-item d-none d-sm-inline-block quick_link">
-		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+		{{-- <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 		  Quick Create <span class="caret"></span>
-		</a>
+		</a> --}}
 		<div class="dropdown-menu" x-placement="top-start">
 		  <a class="dropdown-item" tabindex="-1" href="{{route('admin.manageholidaypackage.create')}}">Package</a>
 		  <a class="dropdown-item" tabindex="-1" href="{{route('admin.managedestination.create')}}">Destination</a>

@@ -1,5 +1,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
+	@php
+	$role = Auth::user()->role;
+		// dd(canAccessRoute($role, 'view-leads'));
+	@endphp
 	<!-- Brand Logo -->
 	<a href="{{route('admin.dashboard')}}" class="brand-link">
 	   <img src="{!! asset('public/img/Frontend/img/logo-header.png') !!}" alt="Logo" class="brand-image" /> 
@@ -233,13 +237,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ url('department/sub-admin') }}" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Sub Admin List</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Add Department</p>
 							</a>
@@ -296,8 +300,8 @@
 					</ul>
 				</li>
 				@endif --}}
-				
-				@if(Auth::user()->role == 1 || @in_array('holiday_package',  $modules))
+
+				{{-- @if(Auth::user()->role == 1 || @in_array('holiday_package',  $modules)) --}}
 				<?php
 					$classtype = '';
 					
@@ -395,7 +399,7 @@
 					  </li> */ ?>
 					</ul>
 				</li>	
-				@endif
+				{{-- @endif --}}
 				<?php
 				//echo Route::currentRouteName();
 				if(Route::currentRouteName() == 'admin.flights.index' || Route::currentRouteName() == 'admin.flightdetail.index' || Route::currentRouteName() == 'admin.flights.create' || Route::currentRouteName() == 'admin.flights.edit' || Route::currentRouteName() == 'admin.flightdetail.create' || Route::currentRouteName() == 'admin.flightdetail.edit'){
@@ -428,13 +432,13 @@
 						</li>   
 					</ul>
 				</li>	  
-				@if(Auth::user()->role == 1 || @in_array('lead_management',  $modules))
-				<li class="nav-item {{(Route::currentRouteName() == 'admin.leads.index' ) ? 'menu-open' : ''}}">
+				{{-- @if(Auth::user()->role == 1 || @in_array('lead_management',  $modules)) --}}
+				{{-- <li class="nav-item {{(Route::currentRouteName() == 'admin.leads.index' ) ? 'menu-open' : ''}}">
 					<a href="{{route('admin.leads.index')}}" class="nav-link">
 						<i class="nav-icon fas fa-cogs"></i> Leads
 					</a>
-				</li>  
-				@endif
+				</li>   --}}
+				{{-- @endif --}}
 
 				@if(!empty($modules ))
 				@if(@in_array('staff',  $modules))

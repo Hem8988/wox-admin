@@ -4,7 +4,9 @@ use App\Airport;
 use Illuminate\Support\Carbon;
 use App\PermissionCategory;
 use App\Permission;
+use App\role_has_permission;
 use function foo\func;
+use App\UserType;
 
 function madeusToken()
 {
@@ -520,29 +522,48 @@ function get_permission($min_cat_id)
 }
 
 function countTotalMainPer($rolId, $categoryId)
-	{
+{
 
-		return  0;
-		// if (isset($rolId) && !empty($rolId)) {
-		// 	$where = array('role_id' => $rolId);
-		// 	$res = $ci->global_model->getdata('role_has_permission', $where);
-		// 	$count = [];
-		// 	if (!empty($res)) {
-		// 		foreach ($res as $key => $result) {
-		// 			// var_dump($resultcategoryId);die;
-		// 			$ci->db->select('*');
-		// 			$ci->db->from('user_permission');
-		// 			$ci->db->where('permission_slug', $result->permission_name_slug);
-		// 			$ci->db->where('category_id', $categoryId);
-		// 			$per = $ci->db->get()->result();
-		// 			if (!empty($per)) {
-		// 				$count[] += $key;
-		// 			}
-		// 		}
-		// 	}
-		// 	return !empty($count) ? count($count) : '0';
-		// } else {
-		// 	return 0;
-		// }
+	return  0;
+	// if (isset($rolId) && !empty($rolId)) {
+	// 	$where = array('role_id' => $rolId);
+	// 	$res = $ci->global_model->getdata('role_has_permission', $where);
+	// 	$count = [];
+	// 	if (!empty($res)) {
+	// 		foreach ($res as $key => $result) {
+	// 			// var_dump($resultcategoryId);die;
+	// 			$ci->db->select('*');
+	// 			$ci->db->from('user_permission');
+	// 			$ci->db->where('permission_slug', $result->permission_name_slug);
+	// 			$ci->db->where('category_id', $categoryId);
+	// 			$per = $ci->db->get()->result();
+	// 			if (!empty($per)) {
+	// 				$count[] += $key;
+	// 			}
+	// 		}
+	// 	}
+	// 	return !empty($count) ? count($count) : '0';
+	// } else {
+	// 	return 0;
+	// }
+}
+
+
+function UserType($id)
+{
+	$UserType = UserType::where('id', $id)->first();
+	return $UserType->name;
+}
+
+
+
+function canAccessRoute($roleId, $specificCondition)
+{
+	if ($roleId == 0) {
+		return $specificCondition;
+	} else {
+		$role_per= role_has_permission::where('role_id',$roleId)->where('permission_name_slug', $specificCondition)->first();
+		return !empty($role_per->permission_name_slug) ? $role_per->permission_name_slug : '';
 	}
-
+	return '';
+}

@@ -4,6 +4,9 @@
 @section('content')
 
 <style>
+    li.nav-item.clickme {
+    padding: 6px;
+}
     .row_permission label input {
         margin-right: 10px;
     }
@@ -18,23 +21,32 @@
         color: #fff !important;
         background-color: #89ad3e;
     }
+
+    .activelink {
+        color: red;
+    }
 </style>
 
 <!-- orignaol form -->
 <div class="content-wrapper">
     <div class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Assign Permissions</h1>
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-		</div><!-- /.container-fluid -->
-	</div>
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Assign Permissions</h1>
+                    @if (Session::has('message'))
+                    <div class="alert alert-info">{{ Session::get('message') }}</div>
+                    @endif
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
     <section class="content">
         <div class="container-fluid">
             <form class="form-horizontal needs-validation" method="POST" id="create_role" novalidate
-                action="<?= 'Superadmin/save_create'; ?>">
+                action="{{  url('/department/store') }}">
+                @csrf
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -73,14 +85,14 @@
                                 </label>
                                 <div class="col-md-12">
                                     <label class="radio-inline">
-                                        <input class="enable-icheck status" type="radio" value="true" name="status"
+                                        <input class="enable-icheck status" type="radio" value="1" name="status"
                                             id="role_active_true" <?=!empty($role) && $role->status == true ? 'checked'
                                         : ''; ?>
                                         />
                                         Yes
                                     </label>
                                     <label class="radio-inline">
-                                        <input class="enable-icheck ms-4 status" type="radio" value="false"
+                                        <input class="enable-icheck ms-4 status" type="radio" value="0"
                                             name="status" id="role_active_false" <?=!empty($role) && $role->status ==
                                         false ? 'checked' : '';
                                         ?>
@@ -102,20 +114,21 @@
                         $color = array('#F26A6D', '#FCC56E', '#96BB7F', '#44c9c7', '#ff43a5');
                         foreach (permissionCategory() as $key => $min_cat) {
                         $color_random = $min_cat['color_code'];
+                        $tabname = str_replace(" ", "-", $min_cat['categoriname']);
                     ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link <?= $min_cat['id'] == 1 ? '' : '' ?> tabSet"
-                                            data-bs-toggle="tab" href="#<?= $min_cat['categoriname'] ?>" role="tab">
-                                            <span>
-                                                <?= ucfirst($min_cat['categoriname']) ?>
-                                            </span>
-                                            <span class="badge badge-primary ms-2 <?= $min_cat['categoriname'] ?>"
-                                                style=" background-color: <?= $color_random; ?>;">
-                                                <?= countTotalMainPer(!empty($role) ? $role->id : '',  $min_cat['id'] ); ?>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <?php
+                    <li class="nav-item clickme">
+                        <a class="nav-link <?= $min_cat['id'] == 1 ? 'activelink' : '' ?>" href="javascript:void();"
+                            data-tag="#<?= $tabname; ?>">
+                            <span>
+                                <?= ucfirst($min_cat['categoriname']) ?>
+                            </span>
+                            <span class="badge badge-primary ms-2 <?= $min_cat['categoriname'] ?>"
+                                style=" background-color: <?= $color_random; ?>;">
+                                <?= countTotalMainPer(!empty($role) ? $role->id : '',  $min_cat['id'] ); ?>
+                            </span>
+                        </a>
+                    </li>
+                    <?php
                     }
                     ?>
                 </ul>
@@ -125,9 +138,9 @@
                 <div class="tab-content mt-4">
                     <?php foreach (permissionCategory() as $key => $min_cat) {
                         $color_random = $color[array_rand($color)];
+                        $tabname = str_replace(" ", "-", $min_cat['categoriname']);
                     ?>
-                    <div class="tab-pane <?= $min_cat['id']  ==  1 ? 'active' : '' ?>"
-                        id="<?= $min_cat['categoriname'] ?>" role="tabpanel">
+                    <div class="list <?= $min_cat['id']  ==  1 ? '' : 'hide' ?>" id="<?= $tabname ;?>">
                         <div class="row_permission">
                             <div class="container_roles">
                                 <div class="card">
@@ -145,8 +158,7 @@
                                                     for="checbox_<?= $permission->permission_slug; ?>">
                                                     <input type="checkbox"
                                                         id="checbox_<?= $permission->permission_slug; ?>"
-                                                        name="permission[]"
-                                                        value="<?= $permission->permission_slug ?>"
+                                                        name="permission[]" value="<?= $permission->permission_slug ?>"
                                                         class='permission me-3 box_body_checkbox checkboxClass'
                                                         <?=$checked; ?>>
                                                     <?= ucfirst($permission->permissionName); ?>
@@ -161,20 +173,34 @@
                             </div>
 
                         </div>
-                        <?php } ?>
                     </div>
                     <?php } ?>
+                    <?php } ?>
                 </div>
-            <?php
+                <?php
 } ?>
-                    <div class="mt-4  text-end">
-                        <button type="submit" class="btn btn-success save_per">Save</button>
-                        <button type="submit" class="btn btn-danger">Reset</button>
-                    </div>
-                    <div class="roleRes"></div>
+                <div class="mt-4  text-end">
+                    <button type="submit" class="btn btn-success save_per">Save</button>
+                    <button type="submit" class="btn btn-danger">Reset</button>
+                </div>
+                <div class="roleRes"></div>
             </form>
             <!-- orignaol form end -->
     </section>
 </div>
 
 @endsection
+@section('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('.clickme a').click(function(){
+            $('.clickme a').removeClass('activelink');
+            $(this).addClass('activelink');
+            var tagid = $(this).data('tag');
+            $('.list').removeClass('active').addClass('hide');
+            $(tagid).removeClass('hide');
+        });
+    });
+
+</script>@endsection

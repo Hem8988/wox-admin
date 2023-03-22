@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserType extends Migration
+class CreateRoleHasPermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class UserType extends Migration
      */
     public function up()
     {
-        Schema::create('user_types', function (Blueprint $table) {
+        Schema::create('role_has_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('position')->nullable();
-            $table->string('status')->default(1);
-            $table->softDeletes();
+            $table->text('permission_name_slug'); 
+            $table->integer('role_id'); 
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class UserType extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('role_has_permissions');
     }
 }

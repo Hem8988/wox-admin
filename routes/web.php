@@ -670,7 +670,7 @@ Route::post('/photo-gallery/update_action', 'Admin\MediaController@update_action
 
 // });     
 
-Route::get('/agent-signup', 'AgentsignupController@index')->name('agent-signup.index');	
+// Route::get('/agent-signup', 'AgentsignupController@index')->name('agent-signup.index');	
 // Route::post('/forgot_password', 'HomeController@forgotPassword')->name('forgot_password');	
 // Route::get('/reset_link/{token}', 'HomeController@resetLink')->name('reset_link');	
 // Route::post('/reset_link', 'HomeController@resetLink')->name('reset_link');
@@ -683,7 +683,14 @@ Route::controller(Admin\RolesController::class)->group(function () {
 	Route::prefix('department')->name('department')->group(function () {
 		Route::get('/', 'index')->name('department');
 		Route::get('/add', 'create')->name('department.create');
+		Route::post('/store', 'saveRole')->name('department.create');
+		Route::get('/sub-admin', 'subAdmin')->name('subAdmin');
+		Route::get('/sub-admin/add/{id?}', 'subAdminAdd')->name('subAdminAdd');
+		Route::get('/sub-admin/delete/{id?}', 'deleteuser')->name('deleteuser');
+		Route::post('/sub-admin/save', 'storeuser')->name('storeuser');
 		Route::get('/superAdmin', 'superAdmin')->name('superAdmin');
+		Route::get('/user-view/{id?}', 'viewUser')->name('viewUser');
+		Route::post('/state', 'state')->name('state');
 		Route::post('/superAdmin/add', 'superAdminStore')->name('superAdminStore');
 	});
 });
