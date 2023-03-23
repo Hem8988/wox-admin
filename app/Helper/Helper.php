@@ -515,6 +515,11 @@ function getusername($id)
 	$user = Admin::where('id',$id)->first();
 	return ucfirst($user->first_name) .' '.$user->last_name ?? '';
 }
+function getlogout($id)
+{
+	$user = Admin::where('id',$id)->first(); 
+	return $user->logout_user;
+}
 function permissionCategory()
 {
 	$permissionCategory = PermissionCategory::all();

@@ -65,8 +65,11 @@
 											<div class="asession_location">{{$session->browser ?? ''}}</div>
 										 
 
-
+									@if(getlogout($session->user_id) == 2)
+										<div class="asession_action text-warning current"><a data-id="{{$session->user_id}}" class='kill_session'>Session Logged Out</a></div>
+									@else
 											<div class="asession_action text-danger current"><a data-id="{{$session->user_id}}" class='kill_session'>Kill session</a></div>
+									@endif
 											<div data-toggle="modal" data-target="#myModal" class="asession_action current">Session Detail </div>
 
 										</div>

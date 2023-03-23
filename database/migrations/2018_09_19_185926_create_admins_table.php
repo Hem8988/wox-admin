@@ -24,7 +24,7 @@ class CreateAdminsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     * ALTER TABLE `admins` ADD `logout_user` INT(10) NULL DEFAULT '1' COMMENT '1 = false,2 = true' AFTER `aadhaar_card`;
      * @return void
      */
     public function down()

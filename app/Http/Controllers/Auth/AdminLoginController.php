@@ -171,9 +171,7 @@ class AdminLoginController extends Controller
     public function logout(Request $request)
     { 
         if(!empty($request->otheruser)){  
-            $user = Admin::where('id',$request->user_id)->first();  
-            
-            // Auth::guard('admin')->logoutOtherDevices($user->decrypt_password);
+            $user = Admin::where('id',$request->user_id)->update(['logout_user'=>2]); 
             return redirect()->back();
         }
         Auth::guard('admin')->logout();

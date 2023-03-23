@@ -46,6 +46,13 @@ class AdminController extends Controller
      */
     public function dashboard()
     {	
+		if(!empty(Auth::user()) && Auth::user()->logout_user == 2){
+			 
+				  \App\Admin::where('id',Auth::user()->id)->update(['logout_user'=>1]);
+				  Auth::guard('admin')->logout();
+				  return redirect('/');
+			 
+	}
 		/* Leads */
 		$not_contacted = Lead::where('assign_to', '=', Auth::user()->id)->where('status', '=', 0)->count();
 		$create_porposal = Lead::where('assign_to', '=', Auth::user()->id)->where('status', '=', 1)->count();

@@ -259,7 +259,7 @@
 	<body class="hold-transition sidebar-mini layout-fixed loderover">
 	
 		<div class="wrapper">
-		<div id="loader">
+		<div id="loader">	
 			<div class="overlay">
               <i class="fa fa-refresh fa-spin"></i>
             </div> 
